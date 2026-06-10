@@ -1,0 +1,262 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;500;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#0c0c0c;--surface:#141414;--border:#2a2a2a;--accent:#e8ff47;
+    --text:#edede8;--muted:#888;--dim:#444;--card:#181818;
+    --font-head:'Syne',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+  }
+  body{background:var(--bg);color:var(--text);font-family:var(--font-head);min-height:100vh;}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100;}
+  .nav-name{font-size:13px;font-family:var(--font-mono);color:var(--accent);letter-spacing:0.05em;}
+  .nav-links{display:flex;gap:1.5rem;}
+  .nav-links a{font-size:12px;font-family:var(--font-mono);color:var(--muted);text-decoration:none;letter-spacing:0.07em;cursor:pointer;transition:color 0.15s;}
+  .nav-links a:hover{color:var(--text);}
+
+  .hero{padding:5rem 2rem 4rem;max-width:860px;}
+  .hero-tag{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.14em;margin-bottom:1.5rem;display:flex;align-items:center;gap:6px;}
+  .status-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+  .hero h1{font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:700;line-height:1.06;letter-spacing:-0.025em;margin-bottom:1.5rem;color:var(--text);}
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero-desc{font-family:var(--font-mono);font-size:13.5px;color:#aaa;max-width:500px;line-height:1.85;margin-bottom:2.5rem;}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-primary{background:var(--accent);color:#0c0c0c;font-family:var(--font-mono);font-size:12px;padding:11px 22px;border:none;cursor:pointer;letter-spacing:0.07em;font-weight:500;transition:opacity 0.15s;}
+  .btn-primary:hover{opacity:0.88;}
+  .btn-outline{background:transparent;color:var(--text);font-family:var(--font-mono);font-size:12px;padding:11px 22px;border:1px solid var(--border);cursor:pointer;letter-spacing:0.07em;transition:border-color 0.15s,color 0.15s;}
+  .btn-outline:hover{border-color:#666;color:var(--text);}
+
+  section{padding:4rem 2rem;border-top:1px solid var(--border);}
+  .sec-label{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);letter-spacing:0.15em;margin-bottom:2rem;opacity:0.85;}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:860px;}
+  .about-grid p{font-family:var(--font-mono);font-size:13px;color:#aaa;line-height:1.95;}
+  .about-grid strong{color:var(--text);font-weight:500;}
+
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);max-width:1100px;}
+  .proj-card{background:var(--bg);padding:1.75rem;cursor:pointer;transition:background 0.15s;position:relative;}
+  .proj-card:hover:not(.locked){background:var(--card);}
+  .proj-card.featured{background:var(--card);grid-column:span 2;}
+
+  .locked{cursor:default;opacity:1;}
+  .locked .proj-title{color:var(--dim);}
+  .locked .proj-desc{color:var(--dim);}
+  .locked .tag{border-color:#333;color:#3a3a3a;}
+  .locked .proj-num{color:#3a3a3a;}
+  .locked .proj-arrow{color:#333;}
+  .locked-badge{font-family:var(--font-mono);font-size:9px;color:#3a3a3a;border:1px solid #2a2a2a;padding:2px 7px;letter-spacing:0.1em;margin-left:8px;vertical-align:middle;}
+
+  .proj-num{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:1rem;}
+  .proj-title{font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;line-height:1.25;color:var(--text);}
+  .proj-desc{font-family:var(--font-mono);font-size:12.5px;color:#999;line-height:1.75;margin-bottom:1.25rem;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-family:var(--font-mono);font-size:10px;padding:3px 8px;border:1px solid var(--border);color:#888;letter-spacing:0.04em;}
+  .tag.accent{border-color:rgba(232,255,71,0.5);color:var(--accent);}
+  .proj-arrow{font-size:16px;color:var(--accent);margin-top:1.1rem;display:block;text-decoration:none;}
+
+  .skills-row{display:flex;flex-wrap:wrap;gap:2rem;max-width:900px;}
+  .skill-group h4{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);letter-spacing:0.12em;margin-bottom:0.75rem;opacity:0.85;}
+  .skill-list{list-style:none;}
+  .skill-list li{font-family:var(--font-mono);font-size:12.5px;color:#aaa;padding:5px 0;border-bottom:1px solid var(--border);}
+  .skill-list li:last-child{border-bottom:none;}
+  .skill-list li.dim-skill{color:var(--dim);}
+
+  .research-card{background:var(--card);border:1px solid var(--border);padding:2rem;max-width:720px;}
+  .research-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.8rem;color:var(--text);}
+  .research-card p{font-family:var(--font-mono);font-size:13px;color:#aaa;line-height:1.85;margin-bottom:1rem;}
+  .finding{display:flex;gap:0.75rem;margin-top:1rem;}
+  .finding-label{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;white-space:nowrap;padding-top:3px;}
+  .finding-text{font-family:var(--font-mono);font-size:12.5px;color:#aaa;line-height:1.75;}
+
+  footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  .footer-name{font-family:var(--font-mono);font-size:12px;color:var(--muted);}
+  .footer-links a{font-family:var(--font-mono);font-size:12px;color:var(--muted);text-decoration:none;margin-left:1.5rem;}
+  .footer-links a:hover{color:var(--accent);}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">Om Patnaik — AI and robotics portfolio</h2>
+
+<nav>
+  <span class="nav-name">om patnaik</span>
+  <div class="nav-links">
+    <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">about</a>
+    <a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">projects</a>
+    <a onclick="document.getElementById('research').scrollIntoView({behavior:'smooth'})">research</a>
+    <a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">skills</a>
+    <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-tag"><span class="status-dot"></span>CLASS XII · DELHI · TARGETING AY 2027–28</p>
+  <h1>Building AI<br>from <em>first<br>principles.</em></h1>
+  <p class="hero-desc">From transformer internals to physical reasoning robots — I build the thing, then ask what's underneath it. Currently working through the TARQ curriculum: 10 projects, 14 weekends, one reasoning robot.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">VIEW PROJECTS</button>
+    <a class="btn-outline" href="https://github.com/OmTheLast" target="_blank" style="text-decoration:none;display:inline-block;">GITHUB ↗</a>
+  </div>
+</div>
+
+<section id="about">
+  <p class="sec-label">// ABOUT</p>
+  <div class="about-grid">
+    <p>I'm Om Patnaik, a Class 12 student in Delhi working at the intersection of <strong>machine learning, robotics, and hardware</strong>. My first real research project — comparing mBERT and MuRIL on Hinglish hate speech — taught me to read what a model's failure is actually saying.</p>
+    <p>That question led deeper: from language, to reasoning systems, to physical hardware. I'm now building TARQ — a 6-DOF arm that reasons before it acts. The goal isn't a demo. It's understanding <strong>every layer of the stack</strong>, from training data to silicon.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="sec-label">// PROJECTS</p>
+  <div class="projects-grid">
+
+    <div class="proj-card featured">
+      <div class="proj-num">001 · RESEARCH — DONE</div>
+      <div class="proj-title">mBERT vs MuRIL — Hinglish Hate Speech</div>
+      <div class="proj-desc">Fine-tuned mBERT and compared it against MuRIL on Hinglish hate speech detection. The finding wasn't the accuracy gap — it was what the failure revealed about how multilingual models handle code-switched language that wasn't in their training distribution.</div>
+      <div class="proj-tags">
+        <span class="tag accent">Published-quality</span>
+        <span class="tag accent">Python</span>
+        <span class="tag">mBERT</span>
+        <span class="tag">MuRIL</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">NLP</span>
+      </div>
+      <a class="proj-arrow" href="https://github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech" target="_blank">VIEW ON GITHUB ↗</a>
+    </div>
+
+    <div class="proj-card locked">
+      <div class="proj-num">002 · CAPSTONE <span class="locked-badge">IN PROGRESS</span></div>
+      <div class="proj-title">TARQ — Physical Reasoning Robot</div>
+      <div class="proj-desc">A 6-DOF servo arm on Raspberry Pi 5. Listens, sees, reasons before acting. Uses Moondream VLM + Llama-3. Asks when uncertain. Refuses unsafe commands — enforced at both prompt and code level.</div>
+      <div class="proj-tags">
+        <span class="tag">Raspberry Pi 5</span><span class="tag">Llama-3</span><span class="tag">Moondream</span><span class="tag">PyTorch</span><span class="tag">FastAPI</span><span class="tag">Ollama</span>
+      </div>
+      <span class="proj-arrow">— coming soon</span>
+    </div>
+
+    <div class="proj-card locked">
+      <div class="proj-num">003 · HARDWARE <span class="locked-badge">IN PROGRESS</span></div>
+      <div class="proj-title">FPGA Neural Network Accelerator</div>
+      <div class="proj-desc">AG News classifier compiled to Verilog via a Python script. Synthesised on Basys3 Artix-7. Vivado utilisation: Block RAM = 0. Weights aren't fetched from memory — they are the circuit.</div>
+      <div class="proj-tags">
+        <span class="tag">Verilog</span><span class="tag">Vivado</span><span class="tag">Basys3 FPGA</span><span class="tag">INT8</span><span class="tag">scikit-learn</span>
+      </div>
+      <span class="proj-arrow">— coming soon</span>
+    </div>
+
+    <div class="proj-card locked">
+      <div class="proj-num">004 <span class="locked-badge">IN PROGRESS</span></div>
+      <div class="proj-title">Transformer from Scratch</div>
+      <div class="proj-desc">Self-attention, multi-head attention, positional encoding — every component in PyTorch, no high-level abstractions. Character-level language model trained on Shakespeare.</div>
+      <div class="proj-tags"><span class="tag">PyTorch</span><span class="tag">Python</span></div>
+      <span class="proj-arrow">— coming soon</span>
+    </div>
+
+    <div class="proj-card locked">
+      <div class="proj-num">005 <span class="locked-badge">UPCOMING</span></div>
+      <div class="proj-title">Deployed ML API</div>
+      <div class="proj-desc">Text classifier wrapped in FastAPI, containerised with Docker, deployed to Railway and AWS Lightsail with nginx.</div>
+      <div class="proj-tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">nginx</span></div>
+      <span class="proj-arrow">— coming soon</span>
+    </div>
+
+    <div class="proj-card locked">
+      <div class="proj-num">006 <span class="locked-badge">UPCOMING</span></div>
+      <div class="proj-title">RL Robot Arm in Simulation</div>
+      <div class="proj-desc">Kuka iiwa arm trained to reach targets in PyBullet using PPO and SAC. Reward shaping and curriculum learning before any hardware.</div>
+      <div class="proj-tags"><span class="tag">PyBullet</span><span class="tag">PPO/SAC</span><span class="tag">Stable-Baselines3</span></div>
+      <span class="proj-arrow">— coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<section id="research">
+  <p class="sec-label">// RESEARCH</p>
+  <div class="research-card">
+    <h3>mBERT vs MuRIL — Hinglish Hate Speech Detection</h3>
+    <p>Compared two multilingual transformer models on Hinglish hate speech detection — mBERT (Google's multilingual BERT) against MuRIL, a model pre-trained specifically on Indian languages. The core question was not which number was higher, but what mBERT's failure mode reveals about how multilingual models represent code-switched text.</p>
+    <div class="finding">
+      <span class="finding-label">FINDING →</span>
+      <span class="finding-text">Code-switching breaks assumptions baked into clean monolingual pre-training data. mBERT's failure on Hinglish exposes gaps that corpus statistics alone don't predict — MuRIL's Indian-language focus handles the distribution shift more gracefully.</span>
+    </div>
+    <div class="finding" style="margin-top:0.75rem">
+      <span class="finding-label">REPO →</span>
+      <span class="finding-text"><a href="https://github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech ↗</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="sec-label">// SKILLS</p>
+  <div class="skills-row">
+    <div class="skill-group">
+      <h4>LANGUAGES</h4>
+      <ul class="skill-list">
+        <li>Python 3.11</li>
+        <li class="dim-skill">Verilog</li>
+        <li>Bash</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>ML / AI</h4>
+      <ul class="skill-list">
+        <li>PyTorch</li>
+        <li>scikit-learn</li>
+        <li>Ollama</li>
+        <li class="dim-skill">Stable-Baselines3</li>
+        <li>OpenCV</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>INFRA</h4>
+      <ul class="skill-list">
+        <li>Docker</li>
+        <li class="dim-skill">FastAPI</li>
+        <li>Git</li>
+        <li class="dim-skill">AWS Lightsail</li>
+        <li class="dim-skill">Railway</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>HARDWARE</h4>
+      <ul class="skill-list">
+        <li class="dim-skill">Raspberry Pi 5</li>
+        <li class="dim-skill">Basys3 FPGA</li>
+        <li class="dim-skill">Vivado</li>
+        <li class="dim-skill">PCA9685 / I2C</li>
+        <li class="dim-skill">IKPy</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>MODELS</h4>
+      <ul class="skill-list">
+        <li class="dim-skill">Llama-3 (8B)</li>
+        <li class="dim-skill">Moondream 1.7B</li>
+        <li class="dim-skill">YOLOv8</li>
+        <li class="dim-skill">ResNet-18</li>
+        <li>mBERT / MuRIL</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-family:var(--font-mono);font-size:11px;color:var(--dim);margin-top:1.5rem;letter-spacing:0.04em;">greyed out = in progress or upcoming as part of the TARQ curriculum</p>
+</section>
+
+<section id="contact">
+  <p class="sec-label">// CONTACT</p>
+  <p style="font-family:var(--font-mono);font-size:13px;color:#aaa;margin-bottom:2rem;max-width:480px;line-height:1.85;">If you're from an admissions office, a research group, or just curious about something I've built — reach out.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="mailto:om@yourdomain.com" style="font-family:var(--font-mono);font-size:12px;color:var(--accent);text-decoration:none;border:1px solid rgba(232,255,71,0.4);padding:11px 20px;letter-spacing:0.06em;transition:border-color 0.15s;">om@yourdomain.com</a>
+    <a href="https://github.com/OmTheLast" target="_blank" style="font-family:var(--font-mono);font-size:12px;color:#aaa;text-decoration:none;border:1px solid var(--border);padding:11px 20px;letter-spacing:0.06em;">GitHub ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">© 2026 Om Patnaik</span>
+  <div class="footer-links">
+    <a href="https://github.com/OmTheLast" target="_blank">GitHub</a>
+    <a href="#">Resume ↓</a>
+  </div>
+</footer>
