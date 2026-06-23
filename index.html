@@ -1,262 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Experimental portfolio draft for Om Patnaik: AI, robotics, hardware, and research.">
+  <title>Om Patnaik | Systems Draft</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;500;700&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box;}
-  :root{
-    --bg:#0c0c0c;--surface:#141414;--border:#2a2a2a;--accent:#e8ff47;
-    --text:#edede8;--muted:#888;--dim:#444;--card:#181818;
-    --font-head:'Syne',sans-serif;--font-mono:'IBM Plex Mono',monospace;
-  }
-  body{background:var(--bg);color:var(--text);font-family:var(--font-head);min-height:100vh;}
+    :root {
+      --bg: #060706;
+      --panel: rgba(16, 18, 17, 0.72);
+      --panel-strong: rgba(23, 26, 24, 0.88);
+      --line: rgba(199, 255, 86, 0.18);
+      --line-cold: rgba(137, 214, 255, 0.18);
+      --text: #eef2e9;
+      --soft: #a7b0a2;
+      --dim: #5f665d;
+      --acid: #dfff3f;
+      --cyan: #77dcff;
+      --red: #ff6e6e;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+    }
 
-  nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100;}
-  .nav-name{font-size:13px;font-family:var(--font-mono);color:var(--accent);letter-spacing:0.05em;}
-  .nav-links{display:flex;gap:1.5rem;}
-  .nav-links a{font-size:12px;font-family:var(--font-mono);color:var(--muted);text-decoration:none;letter-spacing:0.07em;cursor:pointer;transition:color 0.15s;}
-  .nav-links a:hover{color:var(--text);}
+    * {
+      box-sizing: border-box;
+    }
 
-  .hero{padding:5rem 2rem 4rem;max-width:860px;}
-  .hero-tag{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.14em;margin-bottom:1.5rem;display:flex;align-items:center;gap:6px;}
-  .status-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
-  .hero h1{font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:700;line-height:1.06;letter-spacing:-0.025em;margin-bottom:1.5rem;color:var(--text);}
-  .hero h1 em{font-style:normal;color:var(--accent);}
-  .hero-desc{font-family:var(--font-mono);font-size:13.5px;color:#aaa;max-width:500px;line-height:1.85;margin-bottom:2.5rem;}
-  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
-  .btn-primary{background:var(--accent);color:#0c0c0c;font-family:var(--font-mono);font-size:12px;padding:11px 22px;border:none;cursor:pointer;letter-spacing:0.07em;font-weight:500;transition:opacity 0.15s;}
-  .btn-primary:hover{opacity:0.88;}
-  .btn-outline{background:transparent;color:var(--text);font-family:var(--font-mono);font-size:12px;padding:11px 22px;border:1px solid var(--border);cursor:pointer;letter-spacing:0.07em;transition:border-color 0.15s,color 0.15s;}
-  .btn-outline:hover{border-color:#666;color:var(--text);}
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
 
-  section{padding:4rem 2rem;border-top:1px solid var(--border);}
-  .sec-label{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);letter-spacing:0.15em;margin-bottom:2rem;opacity:0.85;}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(119, 220, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 8%, rgba(223, 255, 63, 0.12), transparent 26rem),
+        linear-gradient(180deg, #050605 0%, #090b0a 50%, #050605 100%);
+      font-family: var(--font-display);
+      overflow-x: hidden;
+    }
 
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:860px;}
-  .about-grid p{font-family:var(--font-mono);font-size:13px;color:#aaa;line-height:1.95;}
-  .about-grid strong{color:var(--text);font-weight:500;}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 50%, rgba(0, 0, 0, 0.12) 50%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0));
+      background-size: 100% 4px, 7px 100%;
+      mix-blend-mode: soft-light;
+    }
 
-  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);max-width:1100px;}
-  .proj-card{background:var(--bg);padding:1.75rem;cursor:pointer;transition:background 0.15s;position:relative;}
-  .proj-card:hover:not(.locked){background:var(--card);}
-  .proj-card.featured{background:var(--card);grid-column:span 2;}
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 35%), rgba(223, 255, 63, 0.13), transparent 17rem);
+      opacity: 0.9;
+      transition: opacity 180ms ease;
+    }
 
-  .locked{cursor:default;opacity:1;}
-  .locked .proj-title{color:var(--dim);}
-  .locked .proj-desc{color:var(--dim);}
-  .locked .tag{border-color:#333;color:#3a3a3a;}
-  .locked .proj-num{color:#3a3a3a;}
-  .locked .proj-arrow{color:#333;}
-  .locked-badge{font-family:var(--font-mono);font-size:9px;color:#3a3a3a;border:1px solid #2a2a2a;padding:2px 7px;letter-spacing:0.1em;margin-left:8px;vertical-align:middle;}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  .proj-num{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:1rem;}
-  .proj-title{font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;line-height:1.25;color:var(--text);}
-  .proj-desc{font-family:var(--font-mono);font-size:12.5px;color:#999;line-height:1.75;margin-bottom:1.25rem;}
-  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
-  .tag{font-family:var(--font-mono);font-size:10px;padding:3px 8px;border:1px solid var(--border);color:#888;letter-spacing:0.04em;}
-  .tag.accent{border-color:rgba(232,255,71,0.5);color:var(--accent);}
-  .proj-arrow{font-size:16px;color:var(--accent);margin-top:1.1rem;display:block;text-decoration:none;}
+    button {
+      font: inherit;
+    }
 
-  .skills-row{display:flex;flex-wrap:wrap;gap:2rem;max-width:900px;}
-  .skill-group h4{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);letter-spacing:0.12em;margin-bottom:0.75rem;opacity:0.85;}
-  .skill-list{list-style:none;}
-  .skill-list li{font-family:var(--font-mono);font-size:12.5px;color:#aaa;padding:5px 0;border-bottom:1px solid var(--border);}
-  .skill-list li:last-child{border-bottom:none;}
-  .skill-list li.dim-skill{color:var(--dim);}
+    #field {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.78;
+    }
 
-  .research-card{background:var(--card);border:1px solid var(--border);padding:2rem;max-width:720px;}
-  .research-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.8rem;color:var(--text);}
-  .research-card p{font-family:var(--font-mono);font-size:13px;color:#aaa;line-height:1.85;margin-bottom:1rem;}
-  .finding{display:flex;gap:0.75rem;margin-top:1rem;}
-  .finding-label{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;white-space:nowrap;padding-top:3px;}
-  .finding-text{font-family:var(--font-mono);font-size:12.5px;color:#aaa;line-height:1.75;}
+    .shell {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
 
-  footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-  .footer-name{font-family:var(--font-mono);font-size:12px;color:var(--muted);}
-  .footer-links a{font-family:var(--font-mono);font-size:12px;color:var(--muted);text-decoration:none;margin-left:1.5rem;}
-  .footer-links a:hover{color:var(--accent);}
-</style>
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 2px;
+      z-index: 10;
+      background: linear-gradient(90deg, var(--acid), var(--cyan));
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      box-shadow: 0 0 22px rgba(223, 255, 63, 0.72);
+    }
 
-<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">Om Patnaik — AI and robotics portfolio</h2>
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem clamp(1rem, 4vw, 3.2rem);
+      background: rgba(6, 7, 6, 0.62);
+      border-bottom: 1px solid rgba(238, 242, 233, 0.09);
+      backdrop-filter: blur(18px);
+    }
 
-<nav>
-  <span class="nav-name">om patnaik</span>
-  <div class="nav-links">
-    <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">about</a>
-    <a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">projects</a>
-    <a onclick="document.getElementById('research').scrollIntoView({behavior:'smooth'})">research</a>
-    <a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">skills</a>
-    <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">contact</a>
-  </div>
-</nav>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--acid);
+      white-space: nowrap;
+    }
 
-<div class="hero">
-  <p class="hero-tag"><span class="status-dot"></span>CLASS XII · DELHI · TARGETING AY 2027–28</p>
-  <h1>Building AI<br>from <em>first<br>principles.</em></h1>
-  <p class="hero-desc">From transformer internals to physical reasoning robots — I build the thing, then ask what's underneath it. Currently working through the TARQ curriculum: 10 projects, 14 weekends, one reasoning robot.</p>
-  <div class="hero-ctas">
-    <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">VIEW PROJECTS</button>
-    <a class="btn-outline" href="https://github.com/OmTheLast" target="_blank" style="text-decoration:none;display:inline-block;">GITHUB ↗</a>
-  </div>
-</div>
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--line);
+      background: rgba(223, 255, 63, 0.07);
+      box-shadow: inset 0 0 24px rgba(223, 255, 63, 0.08);
+    }
 
-<section id="about">
-  <p class="sec-label">// ABOUT</p>
-  <div class="about-grid">
-    <p>I'm Om Patnaik, a Class 12 student in Delhi working at the intersection of <strong>machine learning, robotics, and hardware</strong>. My first real research project — comparing mBERT and MuRIL on Hinglish hate speech — taught me to read what a model's failure is actually saying.</p>
-    <p>That question led deeper: from language, to reasoning systems, to physical hardware. I'm now building TARQ — a 6-DOF arm that reasons before it acts. The goal isn't a demo. It's understanding <strong>every layer of the stack</strong>, from training data to silicon.</p>
-  </div>
-</section>
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.7rem, 2vw, 1.5rem);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.09em;
+      color: var(--soft);
+      text-transform: uppercase;
+    }
 
-<section id="projects">
-  <p class="sec-label">// PROJECTS</p>
-  <div class="projects-grid">
+    .nav-links a {
+      position: relative;
+      padding: 0.35rem 0;
+    }
 
-    <div class="proj-card featured">
-      <div class="proj-num">001 · RESEARCH — DONE</div>
-      <div class="proj-title">mBERT vs MuRIL — Hinglish Hate Speech</div>
-      <div class="proj-desc">Fine-tuned mBERT and compared it against MuRIL on Hinglish hate speech detection. The finding wasn't the accuracy gap — it was what the failure revealed about how multilingual models handle code-switched language that wasn't in their training distribution.</div>
-      <div class="proj-tags">
-        <span class="tag accent">Published-quality</span>
-        <span class="tag accent">Python</span>
-        <span class="tag">mBERT</span>
-        <span class="tag">MuRIL</span>
-        <span class="tag">PyTorch</span>
-        <span class="tag">NLP</span>
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: var(--acid);
+      transform: scaleX(0);
+      transform-origin: 100% 50%;
+      transition: transform 160ms ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.62fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+      min-height: calc(100vh - 4rem);
+      padding: clamp(4rem, 7vw, 7rem) clamp(1rem, 4vw, 3.2rem) clamp(3rem, 7vw, 6rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 1.2rem;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 0.52rem;
+      height: 0.52rem;
+      background: var(--acid);
+      box-shadow: 0 0 18px rgba(223, 255, 63, 0.9);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.48); opacity: 0.45; }
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 58rem;
+      font-size: clamp(3.2rem, 8.1vw, 7.65rem);
+      line-height: 0.85;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .slice {
+      display: block;
+      overflow: hidden;
+    }
+
+    .slice span {
+      display: block;
+      animation: reveal 950ms cubic-bezier(0.2, 0.8, 0.18, 1) both;
+    }
+
+    .slice:nth-child(2) span {
+      animation-delay: 120ms;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(238, 242, 233, 0.72);
+    }
+
+    .slice:nth-child(3) span {
+      animation-delay: 240ms;
+      color: var(--acid);
+      text-shadow: 0 0 30px rgba(223, 255, 63, 0.28);
+    }
+
+    @keyframes reveal {
+      from { transform: translateY(110%) skewY(5deg); }
+      to { transform: translateY(0) skewY(0); }
+    }
+
+    .hero-copy {
+      max-width: 40rem;
+      margin: 1.7rem 0 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: clamp(0.88rem, 1.5vw, 1rem);
+      line-height: 1.9;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.85rem;
+      padding: 0 1rem;
+      border: 1px solid rgba(238, 242, 233, 0.14);
+      background: rgba(238, 242, 233, 0.035);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button.primary {
+      color: #060706;
+      background: var(--acid);
+      border-color: var(--acid);
+      box-shadow: 0 0 28px rgba(223, 255, 63, 0.2);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(223, 255, 63, 0.55);
+      background: rgba(223, 255, 63, 0.09);
+    }
+
+    .button.primary:hover {
+      background: #efff8b;
+    }
+
+    .orbital {
+      position: relative;
+      min-height: 31rem;
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.08), transparent 40%),
+        rgba(16, 18, 17, 0.52);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .orbital::before,
+    .orbital::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(119, 220, 255, 0.15);
+      border-radius: 50%;
+      animation: orbit 14s linear infinite;
+    }
+
+    .orbital::after {
+      inset: 25%;
+      border-color: rgba(223, 255, 63, 0.18);
+      animation-duration: 9s;
+      animation-direction: reverse;
+    }
+
+    @keyframes orbit {
+      to { transform: rotate(360deg); }
+    }
+
+    .core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 9rem;
+      height: 9rem;
+      border: 1px solid rgba(223, 255, 63, 0.42);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(223, 255, 63, 0.17), rgba(7, 8, 7, 0.92) 62%);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 60px rgba(223, 255, 63, 0.14);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .telemetry {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid rgba(238, 242, 233, 0.08);
+      background: rgba(238, 242, 233, 0.08);
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 0.9rem;
+      background: rgba(6, 7, 6, 0.78);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 3.2rem);
+      border-top: 1px solid rgba(238, 242, 233, 0.08);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(18rem, 0.55fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .kicker {
+      margin: 0 0 0.7rem;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 48rem;
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      position: relative;
+      min-height: 19rem;
+      padding: 1.15rem;
+      border: 1px solid rgba(238, 242, 233, 0.11);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.08), transparent 36%),
+        var(--panel);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(223, 255, 63, 0.11), transparent),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 34px 34px, 34px 34px;
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 420ms ease, opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: rgba(223, 255, 63, 0.42);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.12), transparent 42%),
+        var(--panel-strong);
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+      opacity: 1;
+    }
+
+    .card.large {
+      grid-column: span 7;
+    }
+
+    .card.mid {
+      grid-column: span 5;
+    }
+
+    .card.small {
+      grid-column: span 4;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      color: var(--acid);
+    }
+
+    .card h3 {
+      margin: 4rem 0 0.8rem;
+      max-width: 34rem;
+      font-size: clamp(1.45rem, 2.5vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      max-width: 39rem;
+      margin: 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.75;
+    }
+
+    .tags {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(238, 242, 233, 0.12);
+      padding: 0.35rem 0.5rem;
+      color: #bac3b4;
+      background: rgba(238, 242, 233, 0.035);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag.hot {
+      border-color: rgba(223, 255, 63, 0.4);
+      color: var(--acid);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 15rem minmax(0, 1fr);
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+    }
+
+    .rail {
+      border-right: 1px solid rgba(238, 242, 233, 0.1);
+      padding: 1rem;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .steps {
+      display: grid;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      min-height: 5.5rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(238, 242, 233, 0.08);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+
+    .step-code {
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    .step-title {
+      min-width: 0;
+    }
+
+    .step-title strong {
+      display: block;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .step-title span {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .step-state {
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .step.done .step-state {
+      color: var(--cyan);
+    }
+
+    .step.live .step-state {
+      color: var(--acid);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: center;
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background: rgba(16, 18, 17, 0.68);
+      padding: clamp(1.2rem, 4vw, 2rem);
+      backdrop-filter: blur(18px);
+    }
+
+    .contact h2 {
+      max-width: 48rem;
+    }
+
+    .contact p {
+      margin: 1rem 0 0;
+      max-width: 38rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem clamp(1rem, 4vw, 3.2rem);
+      color: var(--dim);
+      border-top: 1px solid rgba(238, 242, 233, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .revealable {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .revealable.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .section-head,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .orbital {
+        min-height: 24rem;
+      }
+
+      .card.large,
+      .card.mid,
+      .card.small {
+        grid-column: 1 / -1;
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        border-right: 0;
+        border-bottom: 1px solid rgba(238, 242, 233, 0.1);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      h1 {
+        font-size: clamp(2.72rem, 13vw, 4.1rem);
+      }
+
+      .telemetry {
+        grid-template-columns: 1fr;
+      }
+
+      .orbital {
+        min-height: 28rem;
+      }
+
+      .card {
+        min-height: 23rem;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+
+      .step-state {
+        white-space: normal;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="shell">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Om Patnaik home">
+        <span class="brand-mark">OP</span>
+        <span>Om Patnaik / build log</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#trajectory">Trajectory</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
       </div>
-      <a class="proj-arrow" href="https://github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech" target="_blank">VIEW ON GITHUB ↗</a>
-    </div>
+    </nav>
 
-    <div class="proj-card locked">
-      <div class="proj-num">002 · CAPSTONE <span class="locked-badge">IN PROGRESS</span></div>
-      <div class="proj-title">TARQ — Physical Reasoning Robot</div>
-      <div class="proj-desc">A 6-DOF servo arm on Raspberry Pi 5. Listens, sees, reasons before acting. Uses Moondream VLM + Llama-3. Asks when uncertain. Refuses unsafe commands — enforced at both prompt and code level.</div>
-      <div class="proj-tags">
-        <span class="tag">Raspberry Pi 5</span><span class="tag">Llama-3</span><span class="tag">Moondream</span><span class="tag">PyTorch</span><span class="tag">FastAPI</span><span class="tag">Ollama</span>
-      </div>
-      <span class="proj-arrow">— coming soon</span>
-    </div>
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Class XII - Delhi - AI / Robotics</div>
+          <h1 aria-label="Building machine intelligence from first principles">
+            <span class="slice"><span>Building</span></span>
+            <span class="slice"><span>Machine</span></span>
+            <span class="slice"><span>Intelligence</span></span>
+          </h1>
+          <p class="hero-copy">
+            I build the system, then dig under it: transformer internals, code-switched language models, FPGA circuits, and a physical reasoning robot that sees, asks, refuses, and acts.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#projects">Enter projects</a>
+            <a class="button" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
 
-    <div class="proj-card locked">
-      <div class="proj-num">003 · HARDWARE <span class="locked-badge">IN PROGRESS</span></div>
-      <div class="proj-title">FPGA Neural Network Accelerator</div>
-      <div class="proj-desc">AG News classifier compiled to Verilog via a Python script. Synthesised on Basys3 Artix-7. Vivado utilisation: Block RAM = 0. Weights aren't fetched from memory — they are the circuit.</div>
-      <div class="proj-tags">
-        <span class="tag">Verilog</span><span class="tag">Vivado</span><span class="tag">Basys3 FPGA</span><span class="tag">INT8</span><span class="tag">scikit-learn</span>
-      </div>
-      <span class="proj-arrow">— coming soon</span>
-    </div>
+        <aside class="orbital" aria-label="System telemetry">
+          <div class="core">TARQ<br>reasoning<br>stack</div>
+          <div class="telemetry">
+            <div class="metric"><span>Mode</span><strong>Build</strong></div>
+            <div class="metric"><span>Focus</span><strong>AI + HW</strong></div>
+            <div class="metric"><span>Signal</span><strong>First principles</strong></div>
+          </div>
+        </aside>
+      </section>
 
-    <div class="proj-card locked">
-      <div class="proj-num">004 <span class="locked-badge">IN PROGRESS</span></div>
-      <div class="proj-title">Transformer from Scratch</div>
-      <div class="proj-desc">Self-attention, multi-head attention, positional encoding — every component in PyTorch, no high-level abstractions. Character-level language model trained on Shakespeare.</div>
-      <div class="proj-tags"><span class="tag">PyTorch</span><span class="tag">Python</span></div>
-      <span class="proj-arrow">— coming soon</span>
-    </div>
+      <section class="section revealable" id="projects">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ selected systems</p>
+            <h2>Not a portfolio wall. A lab surface.</h2>
+          </div>
+          <p>
+            Each card is a system with a claim: what it tests, what it proves, and where it still breaks. Completed work gets proof. Future work stays clearly marked.
+          </p>
+        </div>
 
-    <div class="proj-card locked">
-      <div class="proj-num">005 <span class="locked-badge">UPCOMING</span></div>
-      <div class="proj-title">Deployed ML API</div>
-      <div class="proj-desc">Text classifier wrapped in FastAPI, containerised with Docker, deployed to Railway and AWS Lightsail with nginx.</div>
-      <div class="proj-tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">nginx</span></div>
-      <span class="proj-arrow">— coming soon</span>
-    </div>
+        <div class="grid">
+          <article class="card large tilt">
+            <div class="card-top"><span>001 / research</span><span class="status">done</span></div>
+            <h3>mBERT vs MuRIL on Hinglish hate speech</h3>
+            <p>
+              Fine-tuned multilingual models on code-switched text and treated the failure mode as the result: where general multilingual pretraining stops understanding local distribution shifts.
+            </p>
+            <div class="tags">
+              <span class="tag hot">Python</span>
+              <span class="tag hot">PyTorch</span>
+              <span class="tag">mBERT</span>
+              <span class="tag">MuRIL</span>
+              <span class="tag">NLP</span>
+            </div>
+          </article>
 
-    <div class="proj-card locked">
-      <div class="proj-num">006 <span class="locked-badge">UPCOMING</span></div>
-      <div class="proj-title">RL Robot Arm in Simulation</div>
-      <div class="proj-desc">Kuka iiwa arm trained to reach targets in PyBullet using PPO and SAC. Reward shaping and curriculum learning before any hardware.</div>
-      <div class="proj-tags"><span class="tag">PyBullet</span><span class="tag">PPO/SAC</span><span class="tag">Stable-Baselines3</span></div>
-      <span class="proj-arrow">— coming soon</span>
-    </div>
+          <article class="card mid tilt">
+            <div class="card-top"><span>002 / capstone</span><span class="status">live</span></div>
+            <h3>TARQ physical reasoning robot</h3>
+            <p>
+              6-DOF arm on Raspberry Pi 5. Vision language model, local LLM, safety gates, uncertainty questions, and action planning before motion.
+            </p>
+            <div class="tags">
+              <span class="tag hot">Raspberry Pi</span>
+              <span class="tag">Moondream</span>
+              <span class="tag">Llama</span>
+              <span class="tag">FastAPI</span>
+            </div>
+          </article>
 
+          <article class="card small tilt">
+            <div class="card-top"><span>003 / hardware</span><span>in progress</span></div>
+            <h3>FPGA neural accelerator</h3>
+            <p>
+              AG News classifier compiled into Verilog. No weight fetch from memory: weights become the circuit.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">Vivado</span>
+              <span class="tag">Basys3</span>
+            </div>
+          </article>
+
+          <article class="card small tilt">
+            <div class="card-top"><span>004 / internals</span><span>in progress</span></div>
+            <h3>Transformer from scratch</h3>
+            <p>
+              Attention, positional encoding, training loop, and sampling built manually in PyTorch.
+            </p>
+            <div class="tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">Attention</span>
+              <span class="tag">LM</span>
+            </div>
+          </article>
+
+          <article class="card small tilt">
+            <div class="card-top"><span>005 / deployment</span><span>planned</span></div>
+            <h3>Deployed ML API</h3>
+            <p>
+              A practical service wrapper: FastAPI, Docker, nginx, and cloud deployment.
+            </p>
+            <div class="tags">
+              <span class="tag">FastAPI</span>
+              <span class="tag">Docker</span>
+              <span class="tag">AWS</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section revealable" id="trajectory">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ build trajectory</p>
+            <h2>Language to hardware to embodied action.</h2>
+          </div>
+          <p>
+            The through-line is simple: understand the model, compress the system, then put intelligence into the physical world without hiding behind a black box.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="rail">Project pipeline<br><br>2026 / AY 2027-28</div>
+          <div class="steps">
+            <div class="step done">
+              <div class="step-code">PHASE 01</div>
+              <div class="step-title"><strong>Code-switched language</strong><span>mBERT vs MuRIL: measure, compare, explain the failure.</span></div>
+              <div class="step-state">complete</div>
+            </div>
+            <div class="step live">
+              <div class="step-code">PHASE 02</div>
+              <div class="step-title"><strong>Reasoning stack</strong><span>Vision, language, uncertainty, and refusal logic for TARQ.</span></div>
+              <div class="step-state">active</div>
+            </div>
+            <div class="step">
+              <div class="step-code">PHASE 03</div>
+              <div class="step-title"><strong>Silicon path</strong><span>Compile model weights into hardware and study the tradeoffs.</span></div>
+              <div class="step-state">building</div>
+            </div>
+            <div class="step">
+              <div class="step-code">PHASE 04</div>
+              <div class="step-title"><strong>Robot policy</strong><span>Train simulated behavior before letting real servos move.</span></div>
+              <div class="step-state">queued</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section revealable" id="stack">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ stack map</p>
+            <h2>Comfortable across the messy layers.</h2>
+          </div>
+          <p>
+            The current skill stack is intentionally uneven: strong where projects are done, grey-boxed where the next builds will force depth.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card small tilt">
+            <div class="card-top"><span>languages</span><span>core</span></div>
+            <h3>Python Bash Verilog</h3>
+            <p>Readable experiments, training scripts, automation, and hardware descriptions.</p>
+            <div class="tags"><span class="tag hot">Python</span><span class="tag">Bash</span><span class="tag">Verilog</span></div>
+          </article>
+          <article class="card small tilt">
+            <div class="card-top"><span>models</span><span>applied</span></div>
+            <h3>Transformers VLMs CV</h3>
+            <p>mBERT, MuRIL, Moondream, Llama, OpenCV, and from-scratch internals.</p>
+            <div class="tags"><span class="tag hot">PyTorch</span><span class="tag">OpenCV</span><span class="tag">Ollama</span></div>
+          </article>
+          <article class="card small tilt">
+            <div class="card-top"><span>systems</span><span>next</span></div>
+            <h3>Robotics Deployment Hardware</h3>
+            <p>FastAPI services, Raspberry Pi control loops, FPGA synthesis, and safety layers.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">PCA9685</span><span class="tag">Vivado</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section revealable" id="contact">
+        <div class="contact">
+          <div>
+            <p class="kicker">/ contact</p>
+            <h2>Research groups, admissions offices, curious builders.</h2>
+            <p>
+              The current mission: build serious proof, document the failed attempts, and make the path from idea to working system visible.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="mailto:om@yourdomain.com">Email</a>
+            <a class="button" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Experimental draft / not final copy</span>
+      <span>Om Patnaik - 2026</span>
+    </footer>
   </div>
-</section>
 
-<section id="research">
-  <p class="sec-label">// RESEARCH</p>
-  <div class="research-card">
-    <h3>mBERT vs MuRIL — Hinglish Hate Speech Detection</h3>
-    <p>Compared two multilingual transformer models on Hinglish hate speech detection — mBERT (Google's multilingual BERT) against MuRIL, a model pre-trained specifically on Indian languages. The core question was not which number was higher, but what mBERT's failure mode reveals about how multilingual models represent code-switched text.</p>
-    <div class="finding">
-      <span class="finding-label">FINDING →</span>
-      <span class="finding-text">Code-switching breaks assumptions baked into clean monolingual pre-training data. mBERT's failure on Hinglish exposes gaps that corpus statistics alone don't predict — MuRIL's Indian-language focus handles the distribution shift more gracefully.</span>
-    </div>
-    <div class="finding" style="margin-top:0.75rem">
-      <span class="finding-label">REPO →</span>
-      <span class="finding-text"><a href="https://github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech ↗</a></span>
-    </div>
-  </div>
-</section>
+  <script>
+    const root = document.documentElement;
+    const canvas = document.getElementById("field");
+    const ctx = canvas.getContext("2d");
+    const progress = document.getElementById("progress");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let raf = 0;
 
-<section id="skills">
-  <p class="sec-label">// SKILLS</p>
-  <div class="skills-row">
-    <div class="skill-group">
-      <h4>LANGUAGES</h4>
-      <ul class="skill-list">
-        <li>Python 3.11</li>
-        <li class="dim-skill">Verilog</li>
-        <li>Bash</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>ML / AI</h4>
-      <ul class="skill-list">
-        <li>PyTorch</li>
-        <li>scikit-learn</li>
-        <li>Ollama</li>
-        <li class="dim-skill">Stable-Baselines3</li>
-        <li>OpenCV</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>INFRA</h4>
-      <ul class="skill-list">
-        <li>Docker</li>
-        <li class="dim-skill">FastAPI</li>
-        <li>Git</li>
-        <li class="dim-skill">AWS Lightsail</li>
-        <li class="dim-skill">Railway</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>HARDWARE</h4>
-      <ul class="skill-list">
-        <li class="dim-skill">Raspberry Pi 5</li>
-        <li class="dim-skill">Basys3 FPGA</li>
-        <li class="dim-skill">Vivado</li>
-        <li class="dim-skill">PCA9685 / I2C</li>
-        <li class="dim-skill">IKPy</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>MODELS</h4>
-      <ul class="skill-list">
-        <li class="dim-skill">Llama-3 (8B)</li>
-        <li class="dim-skill">Moondream 1.7B</li>
-        <li class="dim-skill">YOLOv8</li>
-        <li class="dim-skill">ResNet-18</li>
-        <li>mBERT / MuRIL</li>
-      </ul>
-    </div>
-  </div>
-  <p style="font-family:var(--font-mono);font-size:11px;color:var(--dim);margin-top:1.5rem;letter-spacing:0.04em;">greyed out = in progress or upcoming as part of the TARQ curriculum</p>
-</section>
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-<section id="contact">
-  <p class="sec-label">// CONTACT</p>
-  <p style="font-family:var(--font-mono);font-size:13px;color:#aaa;margin-bottom:2rem;max-width:480px;line-height:1.85;">If you're from an admissions office, a research group, or just curious about something I've built — reach out.</p>
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-    <a href="mailto:om@yourdomain.com" style="font-family:var(--font-mono);font-size:12px;color:var(--accent);text-decoration:none;border:1px solid rgba(232,255,71,0.4);padding:11px 20px;letter-spacing:0.06em;transition:border-color 0.15s;">om@yourdomain.com</a>
-    <a href="https://github.com/OmTheLast" target="_blank" style="font-family:var(--font-mono);font-size:12px;color:#aaa;text-decoration:none;border:1px solid var(--border);padding:11px 20px;letter-spacing:0.06em;">GitHub ↗</a>
-  </div>
-</section>
+      const count = Math.max(44, Math.min(110, Math.floor((width * height) / 15000)));
+      particles = Array.from({ length: count }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.42,
+        vy: (Math.random() - 0.5) * 0.42,
+        r: index % 7 === 0 ? 1.7 : 1
+      }));
+    }
 
-<footer>
-  <span class="footer-name">© 2026 Om Patnaik</span>
-  <div class="footer-links">
-    <a href="https://github.com/OmTheLast" target="_blank">GitHub</a>
-    <a href="#">Resume ↓</a>
-  </div>
-</footer>
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(223, 255, 63, 0.72)";
+      ctx.strokeStyle = "rgba(119, 220, 255, 0.13)";
+      ctx.lineWidth = 1;
+
+      for (const p of particles) {
+        if (!reduceMotion) {
+          p.x += p.vx;
+          p.y += p.vy;
+        }
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+        if (p.y < -10) p.y = height + 10;
+        if (p.y > height + 10) p.y = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 120) {
+            ctx.globalAlpha = (1 - distance / 120) * 0.75;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+    }
+
+    function updateScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const amount = max > 0 ? window.scrollY / max : 0;
+      progress.style.transform = `scaleX(${amount})`;
+    }
+
+    function onPointerMove(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+      root.style.setProperty("--mx", `${x}px`);
+      root.style.setProperty("--my", `${y}px`);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      }
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".revealable").forEach((node) => observer.observe(node));
+
+    document.querySelectorAll(".tilt").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        if (reduceMotion || window.innerWidth < 780) return;
+        const rect = card.getBoundingClientRect();
+        const rx = ((event.clientY - rect.top) / rect.height - 0.5) * -8;
+        const ry = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    resize();
+    updateScroll();
+    draw();
+
+    if (reduceMotion) {
+      cancelAnimationFrame(raf);
+      draw();
+    }
+  </script>
+</body>
+</html>
