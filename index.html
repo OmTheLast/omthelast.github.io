@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Experimental portfolio draft for Om Patnaik: AI, robotics, hardware, and research.">
-  <title>Om Patnaik | Systems Draft</title>
+  <meta name="description" content="Om Patnaik builds AI, robotics, hardware, and research systems from first principles.">
+  <title>Om Patnaik | AI, Robotics & Systems</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
 
@@ -295,6 +295,11 @@
       background: #efff8b;
     }
 
+    :is(a, button, summary):focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
     .orbital {
       position: relative;
       min-height: 31rem;
@@ -482,6 +487,10 @@
       grid-column: span 4;
     }
 
+    .card.has-link {
+      padding-bottom: 7.2rem;
+    }
+
     .card-top {
       display: flex;
       justify-content: space-between;
@@ -539,6 +548,185 @@
     .tag.hot {
       border-color: rgba(223, 255, 63, 0.4);
       color: var(--acid);
+    }
+
+    .card-action {
+      position: absolute;
+      left: 1.15rem;
+      bottom: 4.4rem;
+      z-index: 1;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .card-action::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -0.3rem;
+      left: 0;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: 100% 50%;
+      transition: transform 160ms ease;
+    }
+
+    .card-action:hover::after,
+    .card-action:focus-visible::after {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
+
+    .curriculum {
+      margin-top: 1rem;
+      border: 1px solid rgba(238, 242, 233, 0.12);
+      background: rgba(11, 13, 12, 0.88);
+      backdrop-filter: blur(18px);
+      scroll-margin-top: 6rem;
+    }
+
+    .curriculum summary {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      min-height: 5.4rem;
+      padding: 1rem 1.15rem;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .curriculum summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .curriculum-index,
+    .curriculum-toggle,
+    .curriculum-status,
+    .curriculum-number {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .curriculum-index,
+    .curriculum-toggle {
+      color: var(--acid);
+    }
+
+    .curriculum summary strong {
+      display: block;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      text-transform: uppercase;
+    }
+
+    .curriculum summary span:not(.curriculum-index):not(.curriculum-toggle) {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+
+    .curriculum[open] .curriculum-toggle {
+      color: var(--cyan);
+    }
+
+    .curriculum-list {
+      border-top: 1px solid rgba(238, 242, 233, 0.1);
+    }
+
+    .curriculum-item {
+      display: grid;
+      grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem 1.15rem;
+      border-bottom: 1px solid rgba(238, 242, 233, 0.08);
+      transition: background 160ms ease;
+    }
+
+    .curriculum-item:last-child {
+      border-bottom: 0;
+    }
+
+    .curriculum-item:hover {
+      background: rgba(223, 255, 63, 0.035);
+    }
+
+    .curriculum-number {
+      color: var(--dim);
+    }
+
+    .curriculum-item.done .curriculum-number,
+    .curriculum-item.active .curriculum-number {
+      color: var(--acid);
+    }
+
+    .curriculum-copy h3 {
+      margin: 0;
+      font-size: clamp(1rem, 1.8vw, 1.35rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .curriculum-copy p {
+      margin: 0.5rem 0 0;
+      max-width: 55rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
+    .curriculum-meta {
+      display: grid;
+      justify-items: end;
+      gap: 0.65rem;
+      text-align: right;
+    }
+
+    .curriculum-status {
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    .curriculum-item.done .curriculum-status {
+      color: var(--cyan);
+    }
+
+    .curriculum-item.active .curriculum-status {
+      color: var(--acid);
+    }
+
+    .curriculum-link {
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .curriculum-note {
+      margin: 0;
+      padding: 1rem 1.15rem;
+      border-top: 1px solid rgba(119, 220, 255, 0.12);
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.7;
     }
 
     .timeline {
@@ -732,6 +920,20 @@
         gap: 0.55rem;
       }
 
+      .curriculum summary,
+      .curriculum-item {
+        grid-template-columns: 1fr;
+      }
+
+      .curriculum-toggle {
+        justify-self: start;
+      }
+
+      .curriculum-meta {
+        justify-items: start;
+        text-align: left;
+      }
+
       .step-state {
         white-space: normal;
       }
@@ -780,7 +982,7 @@
             <span class="slice"><span>Intelligence</span></span>
           </h1>
           <p class="hero-copy">
-            I build the system, then dig under it: transformer internals, code-switched language models, FPGA circuits, and a physical reasoning robot that sees, asks, refuses, and acts.
+            I build the system, then dig under it: transformer internals, code-switched language research, local AI agents, computer vision, embedded hardware, and a physical reasoning robot that sees, asks, refuses, and acts.
           </p>
           <div class="actions">
             <a class="button primary" href="#projects">Enter projects</a>
@@ -791,9 +993,9 @@
         <aside class="orbital" aria-label="System telemetry">
           <div class="core">TARQ<br>reasoning<br>stack</div>
           <div class="telemetry">
-            <div class="metric"><span>Mode</span><strong>Build</strong></div>
-            <div class="metric"><span>Focus</span><strong>AI + HW</strong></div>
-            <div class="metric"><span>Signal</span><strong>First principles</strong></div>
+            <div class="metric"><span>Sequence</span><strong>02 / 10</strong></div>
+            <div class="metric"><span>Now</span><strong>Data analysis</strong></div>
+            <div class="metric"><span>Target</span><strong>Physical TARQ</strong></div>
           </div>
         </aside>
       </section>
@@ -810,12 +1012,13 @@
         </div>
 
         <div class="grid">
-          <article class="card large tilt">
-            <div class="card-top"><span>001 / research</span><span class="status">done</span></div>
-            <h3>mBERT vs MuRIL on Hinglish hate speech</h3>
+          <article class="card large tilt has-link">
+            <div class="card-top"><span>001 / research</span><span class="status">active</span></div>
+            <h3>Cross-dataset Hinglish hate speech research</h3>
             <p>
-              Fine-tuned multilingual models on code-switched text and treated the failure mode as the result: where general multilingual pretraining stops understanding local distribution shifts.
+              Extends the original mBERT vs MuRIL comparison across datasets, scripts, platforms, and label policies to test when Indian-language pretraining actually generalizes.
             </p>
+            <a class="card-action" href="https://github.com/OmTheLast/mBERT-vs-MuRIL-cross-dataset-hinglish-hate" target="_blank" rel="noreferrer">View research repo &#8599;</a>
             <div class="tags">
               <span class="tag hot">Python</span>
               <span class="tag hot">PyTorch</span>
@@ -825,12 +1028,13 @@
             </div>
           </article>
 
-          <article class="card mid tilt">
-            <div class="card-top"><span>002 / capstone</span><span class="status">live</span></div>
+          <article class="card mid tilt has-link">
+            <div class="card-top"><span>002 / program</span><span class="status">02 of 10 active</span></div>
             <h3>TARQ physical reasoning robot</h3>
             <p>
-              6-DOF arm on Raspberry Pi 5. Vision language model, local LLM, safety gates, uncertainty questions, and action planning before motion.
+              A ten-project curriculum from transformer internals to a 6-DOF Raspberry Pi arm with vision, local reasoning, uncertainty questions, and code-level safety gates.
             </p>
+            <button class="card-action curriculum-trigger" type="button" aria-controls="tarq-curriculum" aria-expanded="false">Open all 10 projects &#8595;</button>
             <div class="tags">
               <span class="tag hot">Raspberry Pi</span>
               <span class="tag">Moondream</span>
@@ -839,45 +1043,143 @@
             </div>
           </article>
 
-          <article class="card small tilt">
-            <div class="card-top"><span>003 / hardware</span><span>in progress</span></div>
-            <h3>FPGA neural accelerator</h3>
-            <p>
-              AG News classifier compiled into Verilog. No weight fetch from memory: weights become the circuit.
-            </p>
-            <div class="tags">
-              <span class="tag">Verilog</span>
-              <span class="tag">Vivado</span>
-              <span class="tag">Basys3</span>
-            </div>
-          </article>
-
-          <article class="card small tilt">
-            <div class="card-top"><span>004 / internals</span><span>in progress</span></div>
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>003 / internals</span><span class="status">done</span></div>
             <h3>Transformer from scratch</h3>
             <p>
-              Attention, positional encoding, training loop, and sampling built manually in PyTorch.
+              A character-level GPT-style transformer built by hand: embeddings, positional encoding, causal attention, residual blocks, training, perplexity, and sampling.
             </p>
+            <a class="card-action" href="https://github.com/OmTheLast/character-transformer-from-scratch" target="_blank" rel="noreferrer">View repo &#8599;</a>
             <div class="tags">
-              <span class="tag">PyTorch</span>
+              <span class="tag hot">PyTorch</span>
               <span class="tag">Attention</span>
-              <span class="tag">LM</span>
+              <span class="tag">Tiny Shakespeare</span>
             </div>
           </article>
 
-          <article class="card small tilt">
-            <div class="card-top"><span>005 / deployment</span><span>planned</span></div>
-            <h3>Deployed ML API</h3>
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>004 / local agent</span><span>prototype</span></div>
+            <h3>Lumen desktop agent</h3>
             <p>
-              A practical service wrapper: FastAPI, Docker, nginx, and cloud deployment.
+              A local-first macOS agent with planning, tool use, voice input, confirmation gates, and a native state-aware presence layer.
             </p>
+            <a class="card-action" href="https://github.com/OmTheLast/Lumen" target="_blank" rel="noreferrer">View repo &#8599;</a>
             <div class="tags">
-              <span class="tag">FastAPI</span>
-              <span class="tag">Docker</span>
-              <span class="tag">AWS</span>
+              <span class="tag hot">Python</span>
+              <span class="tag">Ollama</span>
+              <span class="tag">MLX Whisper</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>005 / grounded AI</span><span>mvp</span></div>
+            <h3>DecisionCitation</h3>
+            <p>
+              A local referee-call explainer grounded in the IFAB Laws of the Game, using page-aware retrieval and a local language model.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/DECISIONCITATION" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">Python</span>
+              <span class="tag">BM25</span>
+              <span class="tag">Ollama</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>006 / computer vision</span><span>working build</span></div>
+            <h3>HandTracking controller</h3>
+            <p>
+              Browser-visible MediaPipe hand tracking with pinch-to-grab window movement, smoothing, deadzones, and velocity-sensitive control.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/HandTracking" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">OpenCV</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">Flask</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>007 / embedded</span><span class="status">done</span></div>
+            <h3>ESP32 touch diagnostic</h3>
+            <p>
+              A PlatformIO diagnostic for raw XPT2046 touch coordinates and pressure on an ESP32 touchscreen, with display and serial output.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/esp32-touch-pressure-diagnostic" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">C++</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">SPI</span>
             </div>
           </article>
         </div>
+
+        <details class="curriculum" id="tarq-curriculum">
+          <summary>
+            <span class="curriculum-index">TARQ / 10</span>
+            <span><strong>Open the complete build sequence</strong><span>One continuous path from first-principles ML to a physical reasoning robot.</span></span>
+            <span class="curriculum-toggle">Expand +</span>
+          </summary>
+          <div class="curriculum-list">
+            <article class="curriculum-item done">
+              <div class="curriculum-number">01</div>
+              <div class="curriculum-copy">
+                <h3>Neural Networks from Scratch</h3>
+                <p>Build a decoder-only transformer by hand: embeddings, attention, residual blocks, training loops, evaluation, and generation.</p>
+              </div>
+              <div class="curriculum-meta"><span class="curriculum-status">complete</span><a class="curriculum-link" href="https://github.com/OmTheLast/character-transformer-from-scratch" target="_blank" rel="noreferrer">GitHub &#8599;</a></div>
+            </article>
+            <article class="curriculum-item active">
+              <div class="curriculum-number">02</div>
+              <div class="curriculum-copy">
+                <h3>Data Analysis and the Scientific Method</h3>
+                <p>Analyze AG News, establish a TF-IDF baseline, evaluate with confusion matrices, F1 and ROC curves, inspect errors with LIME, and write the result.</p>
+              </div>
+              <div class="curriculum-meta"><span class="curriculum-status">active</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">03</div>
+              <div class="curriculum-copy"><h3>Build and Deploy an API</h3><p>Serve the Project 2 classifier with FastAPI and Pydantic, test it with pytest, containerize it with Docker, and deploy it through Railway and AWS Lightsail.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">04</div>
+              <div class="curriculum-copy"><h3>Computer Vision Fundamentals</h3><p>Move from CNN fundamentals and filter visualization to CIFAR-10, ResNet-18 transfer learning, YOLO, and real-time webcam detection.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">05</div>
+              <div class="curriculum-copy"><h3>Train a Small Language Model</h3><p>Implement byte-pair encoding, curate a Simple English Wikipedia corpus, train a BPE transformer, and test scaling and domain adaptation.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">06</div>
+              <div class="curriculum-copy"><h3>Robotics Simulation</h3><p>Learn MDPs and the Bellman equation, compare PPO and SAC, and train a Kuka iiwa arm in PyBullet using reward shaping and curriculum learning.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">07</div>
+              <div class="curriculum-copy"><h3>Perception and Planning Integration</h3><p>Connect a virtual camera to the arm through OpenCV detection, pixel-to-world mapping, homography, planning, inverse kinematics, and closed-loop execution.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">08</div>
+              <div class="curriculum-copy"><h3>TARQ Software Prototype</h3><p>Assemble offline speech, vision, local reasoning, structured prompts, ambiguity detection, active learning, and independent safety interlocks before hardware.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">09</div>
+              <div class="curriculum-copy"><h3>TARQ Physical Capstone</h3><p>Build the Raspberry Pi 5 robot, calibrate its camera, solve and validate inverse kinematics, control six servos, and demonstrate safe failure handling.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">10</div>
+              <div class="curriculum-copy"><h3>Unsupervised Learning and Classical ML</h3><p>Implement and compare PCA, t-SNE, UMAP, k-Means, Gaussian mixtures, expectation-maximization, and support vector machines.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+          </div>
+          <p class="curriculum-note">GitHub links appear only when a public repository exists. Project 1 is published; Project 2 is currently being built locally.</p>
+        </details>
       </section>
 
       <section class="section revealable" id="trajectory">
@@ -887,7 +1189,7 @@
             <h2>Language to hardware to embodied action.</h2>
           </div>
           <p>
-            The through-line is simple: understand the model, compress the system, then put intelligence into the physical world without hiding behind a black box.
+            The through-line is simple: understand the model, learn to evaluate it honestly, connect the components into a system, then put intelligence into the physical world.
           </p>
         </div>
 
@@ -896,22 +1198,22 @@
           <div class="steps">
             <div class="step done">
               <div class="step-code">PHASE 01</div>
-              <div class="step-title"><strong>Code-switched language</strong><span>mBERT vs MuRIL: measure, compare, explain the failure.</span></div>
+              <div class="step-title"><strong>Neural foundations</strong><span>Research with pretrained models, then rebuild a transformer from its tensor operations upward.</span></div>
               <div class="step-state">complete</div>
             </div>
             <div class="step live">
               <div class="step-code">PHASE 02</div>
-              <div class="step-title"><strong>Reasoning stack</strong><span>Vision, language, uncertainty, and refusal logic for TARQ.</span></div>
+              <div class="step-title"><strong>Evaluation discipline</strong><span>Project 2: AG News analysis, baselines, error inspection, explainability, and written evidence.</span></div>
               <div class="step-state">active</div>
             </div>
             <div class="step">
               <div class="step-code">PHASE 03</div>
-              <div class="step-title"><strong>Silicon path</strong><span>Compile model weights into hardware and study the tradeoffs.</span></div>
-              <div class="step-state">building</div>
+              <div class="step-title"><strong>Deployed perception</strong><span>APIs, computer vision, a small language model, and the interfaces that make components cooperate.</span></div>
+              <div class="step-state">queued</div>
             </div>
             <div class="step">
               <div class="step-code">PHASE 04</div>
-              <div class="step-title"><strong>Robot policy</strong><span>Train simulated behavior before letting real servos move.</span></div>
+              <div class="step-title"><strong>Embodied reasoning</strong><span>Simulation, planning, voice and vision, safety gates, then the physical TARQ arm.</span></div>
               <div class="step-state">queued</div>
             </div>
           </div>
@@ -932,9 +1234,9 @@
         <div class="grid">
           <article class="card small tilt">
             <div class="card-top"><span>languages</span><span>core</span></div>
-            <h3>Python Bash Verilog</h3>
-            <p>Readable experiments, training scripts, automation, and hardware descriptions.</p>
-            <div class="tags"><span class="tag hot">Python</span><span class="tag">Bash</span><span class="tag">Verilog</span></div>
+            <h3>Python C++ Bash</h3>
+            <p>Research pipelines, local tools, computer vision systems, automation, and embedded diagnostics.</p>
+            <div class="tags"><span class="tag hot">Python</span><span class="tag">C++</span><span class="tag">Bash</span></div>
           </article>
           <article class="card small tilt">
             <div class="card-top"><span>models</span><span>applied</span></div>
@@ -944,9 +1246,9 @@
           </article>
           <article class="card small tilt">
             <div class="card-top"><span>systems</span><span>next</span></div>
-            <h3>Robotics Deployment Hardware</h3>
-            <p>FastAPI services, Raspberry Pi control loops, FPGA synthesis, and safety layers.</p>
-            <div class="tags"><span class="tag">FastAPI</span><span class="tag">PCA9685</span><span class="tag">Vivado</span></div>
+            <h3>Agents APIs Embedded Systems</h3>
+            <p>FastAPI services, local inference, guarded tool use, ESP32 hardware, and the path toward Raspberry Pi control loops.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">ESP32</span></div>
           </article>
         </div>
       </section>
@@ -961,15 +1263,14 @@
             </p>
           </div>
           <div class="actions">
-            <a class="button primary" href="mailto:om@yourdomain.com">Email</a>
-            <a class="button" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button primary" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">Open GitHub</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>Experimental draft / not final copy</span>
+      <span>Portfolio system / live build</span>
       <span>Om Patnaik - 2026</span>
     </footer>
   </div>
@@ -1080,6 +1381,24 @@
         card.style.transform = "";
       });
     });
+
+    const curriculum = document.getElementById("tarq-curriculum");
+    const curriculumTrigger = document.querySelector(".curriculum-trigger");
+
+    function syncCurriculumState() {
+      const isOpen = curriculum.open;
+      curriculumTrigger.setAttribute("aria-expanded", String(isOpen));
+      curriculum.querySelector(".curriculum-toggle").textContent = isOpen ? "Collapse -" : "Expand +";
+    }
+
+    curriculumTrigger.addEventListener("click", () => {
+      curriculum.open = true;
+      syncCurriculumState();
+      curriculum.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    });
+
+    curriculum.addEventListener("toggle", syncCurriculumState);
+    syncCurriculumState();
 
     window.addEventListener("resize", resize);
     window.addEventListener("scroll", updateScroll, { passive: true });
