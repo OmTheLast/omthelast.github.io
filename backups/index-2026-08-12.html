@@ -1,0 +1,1417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Om Patnaik builds AI, robotics, hardware, and research systems from first principles.">
+  <title>Om Patnaik | AI, Robotics & Systems</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+    :root {
+      --bg: #060706;
+      --panel: rgba(16, 18, 17, 0.72);
+      --panel-strong: rgba(23, 26, 24, 0.88);
+      --line: rgba(199, 255, 86, 0.18);
+      --line-cold: rgba(137, 214, 255, 0.18);
+      --text: #eef2e9;
+      --soft: #a7b0a2;
+      --dim: #5f665d;
+      --acid: #dfff3f;
+      --cyan: #77dcff;
+      --red: #ff6e6e;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(119, 220, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 8%, rgba(223, 255, 63, 0.12), transparent 26rem),
+        linear-gradient(180deg, #050605 0%, #090b0a 50%, #050605 100%);
+      font-family: var(--font-display);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 50%, rgba(0, 0, 0, 0.12) 50%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0));
+      background-size: 100% 4px, 7px 100%;
+      mix-blend-mode: soft-light;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 35%), rgba(223, 255, 63, 0.13), transparent 17rem);
+      opacity: 0.9;
+      transition: opacity 180ms ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    #field {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.78;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 2px;
+      z-index: 10;
+      background: linear-gradient(90deg, var(--acid), var(--cyan));
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      box-shadow: 0 0 22px rgba(223, 255, 63, 0.72);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem clamp(1rem, 4vw, 3.2rem);
+      background: rgba(6, 7, 6, 0.62);
+      border-bottom: 1px solid rgba(238, 242, 233, 0.09);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--acid);
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--line);
+      background: rgba(223, 255, 63, 0.07);
+      box-shadow: inset 0 0 24px rgba(223, 255, 63, 0.08);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.7rem, 2vw, 1.5rem);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.09em;
+      color: var(--soft);
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.35rem 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: var(--acid);
+      transform: scaleX(0);
+      transform-origin: 100% 50%;
+      transition: transform 160ms ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.62fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+      min-height: calc(100vh - 4rem);
+      padding: clamp(4rem, 7vw, 7rem) clamp(1rem, 4vw, 3.2rem) clamp(3rem, 7vw, 6rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 1.2rem;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 0.52rem;
+      height: 0.52rem;
+      background: var(--acid);
+      box-shadow: 0 0 18px rgba(223, 255, 63, 0.9);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.48); opacity: 0.45; }
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 58rem;
+      font-size: clamp(3.2rem, 8.1vw, 7.65rem);
+      line-height: 0.85;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .slice {
+      display: block;
+      overflow: hidden;
+    }
+
+    .slice span {
+      display: block;
+      animation: reveal 950ms cubic-bezier(0.2, 0.8, 0.18, 1) both;
+    }
+
+    .slice:nth-child(2) span {
+      animation-delay: 120ms;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(238, 242, 233, 0.72);
+    }
+
+    .slice:nth-child(3) span {
+      animation-delay: 240ms;
+      color: var(--acid);
+      text-shadow: 0 0 30px rgba(223, 255, 63, 0.28);
+    }
+
+    @keyframes reveal {
+      from { transform: translateY(110%) skewY(5deg); }
+      to { transform: translateY(0) skewY(0); }
+    }
+
+    .hero-copy {
+      max-width: 40rem;
+      margin: 1.7rem 0 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: clamp(0.88rem, 1.5vw, 1rem);
+      line-height: 1.9;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.85rem;
+      padding: 0 1rem;
+      border: 1px solid rgba(238, 242, 233, 0.14);
+      background: rgba(238, 242, 233, 0.035);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button.primary {
+      color: #060706;
+      background: var(--acid);
+      border-color: var(--acid);
+      box-shadow: 0 0 28px rgba(223, 255, 63, 0.2);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(223, 255, 63, 0.55);
+      background: rgba(223, 255, 63, 0.09);
+    }
+
+    .button.primary:hover {
+      background: #efff8b;
+    }
+
+    :is(a, button, summary):focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .orbital {
+      position: relative;
+      min-height: 31rem;
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.08), transparent 40%),
+        rgba(16, 18, 17, 0.52);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .orbital::before,
+    .orbital::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(119, 220, 255, 0.15);
+      border-radius: 50%;
+      animation: orbit 14s linear infinite;
+    }
+
+    .orbital::after {
+      inset: 25%;
+      border-color: rgba(223, 255, 63, 0.18);
+      animation-duration: 9s;
+      animation-direction: reverse;
+    }
+
+    @keyframes orbit {
+      to { transform: rotate(360deg); }
+    }
+
+    .core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 9rem;
+      height: 9rem;
+      border: 1px solid rgba(223, 255, 63, 0.42);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(223, 255, 63, 0.17), rgba(7, 8, 7, 0.92) 62%);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 60px rgba(223, 255, 63, 0.14);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .telemetry {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid rgba(238, 242, 233, 0.08);
+      background: rgba(238, 242, 233, 0.08);
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 0.9rem;
+      background: rgba(6, 7, 6, 0.78);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 3.2rem);
+      border-top: 1px solid rgba(238, 242, 233, 0.08);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(18rem, 0.55fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .kicker {
+      margin: 0 0 0.7rem;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 48rem;
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      position: relative;
+      min-height: 19rem;
+      padding: 1.15rem;
+      border: 1px solid rgba(238, 242, 233, 0.11);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.08), transparent 36%),
+        var(--panel);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(223, 255, 63, 0.11), transparent),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 34px 34px, 34px 34px;
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 420ms ease, opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: rgba(223, 255, 63, 0.42);
+      background:
+        linear-gradient(135deg, rgba(223, 255, 63, 0.12), transparent 42%),
+        var(--panel-strong);
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+      opacity: 1;
+    }
+
+    .card.large {
+      grid-column: span 7;
+    }
+
+    .card.mid {
+      grid-column: span 5;
+    }
+
+    .card.small {
+      grid-column: span 4;
+    }
+
+    .card.has-link {
+      padding-bottom: 7.2rem;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      color: var(--acid);
+    }
+
+    .card h3 {
+      margin: 4rem 0 0.8rem;
+      max-width: 34rem;
+      font-size: clamp(1.45rem, 2.5vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      max-width: 39rem;
+      margin: 0;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.75;
+    }
+
+    .tags {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(238, 242, 233, 0.12);
+      padding: 0.35rem 0.5rem;
+      color: #bac3b4;
+      background: rgba(238, 242, 233, 0.035);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag.hot {
+      border-color: rgba(223, 255, 63, 0.4);
+      color: var(--acid);
+    }
+
+    .card-action {
+      position: absolute;
+      left: 1.15rem;
+      bottom: 4.4rem;
+      z-index: 1;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .card-action::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -0.3rem;
+      left: 0;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: 100% 50%;
+      transition: transform 160ms ease;
+    }
+
+    .card-action:hover::after,
+    .card-action:focus-visible::after {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
+
+    .curriculum {
+      margin-top: 1rem;
+      border: 1px solid rgba(238, 242, 233, 0.12);
+      background: rgba(11, 13, 12, 0.88);
+      backdrop-filter: blur(18px);
+      scroll-margin-top: 6rem;
+    }
+
+    .curriculum summary {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      min-height: 5.4rem;
+      padding: 1rem 1.15rem;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .curriculum summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .curriculum-index,
+    .curriculum-toggle,
+    .curriculum-status,
+    .curriculum-number {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .curriculum-index,
+    .curriculum-toggle {
+      color: var(--acid);
+    }
+
+    .curriculum summary strong {
+      display: block;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      text-transform: uppercase;
+    }
+
+    .curriculum summary span:not(.curriculum-index):not(.curriculum-toggle) {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+
+    .curriculum[open] .curriculum-toggle {
+      color: var(--cyan);
+    }
+
+    .curriculum-list {
+      border-top: 1px solid rgba(238, 242, 233, 0.1);
+    }
+
+    .curriculum-item {
+      display: grid;
+      grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem 1.15rem;
+      border-bottom: 1px solid rgba(238, 242, 233, 0.08);
+      transition: background 160ms ease;
+    }
+
+    .curriculum-item:last-child {
+      border-bottom: 0;
+    }
+
+    .curriculum-item:hover {
+      background: rgba(223, 255, 63, 0.035);
+    }
+
+    .curriculum-number {
+      color: var(--dim);
+    }
+
+    .curriculum-item.done .curriculum-number,
+    .curriculum-item.active .curriculum-number {
+      color: var(--acid);
+    }
+
+    .curriculum-copy h3 {
+      margin: 0;
+      font-size: clamp(1rem, 1.8vw, 1.35rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .curriculum-copy p {
+      margin: 0.5rem 0 0;
+      max-width: 55rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
+    .curriculum-meta {
+      display: grid;
+      justify-items: end;
+      gap: 0.65rem;
+      text-align: right;
+    }
+
+    .curriculum-status {
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    .curriculum-item.done .curriculum-status {
+      color: var(--cyan);
+    }
+
+    .curriculum-item.active .curriculum-status {
+      color: var(--acid);
+    }
+
+    .curriculum-link {
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .curriculum-note {
+      margin: 0;
+      padding: 1rem 1.15rem;
+      border-top: 1px solid rgba(119, 220, 255, 0.12);
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.7;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 15rem minmax(0, 1fr);
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+    }
+
+    .rail {
+      border-right: 1px solid rgba(238, 242, 233, 0.1);
+      padding: 1rem;
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .steps {
+      display: grid;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      min-height: 5.5rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(238, 242, 233, 0.08);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+
+    .step-code {
+      color: var(--acid);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    .step-title {
+      min-width: 0;
+    }
+
+    .step-title strong {
+      display: block;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .step-title span {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .step-state {
+      color: var(--dim);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .step.done .step-state {
+      color: var(--cyan);
+    }
+
+    .step.live .step-state {
+      color: var(--acid);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: center;
+      border: 1px solid rgba(238, 242, 233, 0.1);
+      background: rgba(16, 18, 17, 0.68);
+      padding: clamp(1.2rem, 4vw, 2rem);
+      backdrop-filter: blur(18px);
+    }
+
+    .contact h2 {
+      max-width: 48rem;
+    }
+
+    .contact p {
+      margin: 1rem 0 0;
+      max-width: 38rem;
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem clamp(1rem, 4vw, 3.2rem);
+      color: var(--dim);
+      border-top: 1px solid rgba(238, 242, 233, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .revealable {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .revealable.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .section-head,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .orbital {
+        min-height: 24rem;
+      }
+
+      .card.large,
+      .card.mid,
+      .card.small {
+        grid-column: 1 / -1;
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        border-right: 0;
+        border-bottom: 1px solid rgba(238, 242, 233, 0.1);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      h1 {
+        font-size: clamp(2.72rem, 13vw, 4.1rem);
+      }
+
+      .telemetry {
+        grid-template-columns: 1fr;
+      }
+
+      .orbital {
+        min-height: 28rem;
+      }
+
+      .card {
+        min-height: 23rem;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+
+      .curriculum summary,
+      .curriculum-item {
+        grid-template-columns: 1fr;
+      }
+
+      .curriculum-toggle {
+        justify-self: start;
+      }
+
+      .curriculum-meta {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .step-state {
+        white-space: normal;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="shell">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Om Patnaik home">
+        <span class="brand-mark">OP</span>
+        <span>Om Patnaik / build log</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#trajectory">Trajectory</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Class XII - Delhi - AI / Robotics</div>
+          <h1 aria-label="Building machine intelligence from first principles">
+            <span class="slice"><span>Building</span></span>
+            <span class="slice"><span>Machine</span></span>
+            <span class="slice"><span>Intelligence</span></span>
+          </h1>
+          <p class="hero-copy">
+            I build the system, then dig under it: transformer internals, code-switched language research, local AI agents, computer vision, embedded hardware, and a physical reasoning robot that sees, asks, refuses, and acts.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#projects">Enter projects</a>
+            <a class="button" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="orbital" aria-label="System telemetry">
+          <div class="core">TARQ<br>reasoning<br>stack</div>
+          <div class="telemetry">
+            <div class="metric"><span>Sequence</span><strong>02 / 10</strong></div>
+            <div class="metric"><span>Now</span><strong>Data analysis</strong></div>
+            <div class="metric"><span>Target</span><strong>Physical TARQ</strong></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section revealable" id="projects">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ selected systems</p>
+            <h2>Not a portfolio wall. A lab surface.</h2>
+          </div>
+          <p>
+            Each card is a system with a claim: what it tests, what it proves, and where it still breaks. Completed work gets proof. Future work stays clearly marked.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card large tilt has-link">
+            <div class="card-top"><span>001 / research</span><span class="status">active</span></div>
+            <h3>Cross-dataset Hinglish hate speech research</h3>
+            <p>
+              Extends the original mBERT vs MuRIL comparison across datasets, scripts, platforms, and label policies to test when Indian-language pretraining actually generalizes.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/mBERT-vs-MuRIL-cross-dataset-hinglish-hate" target="_blank" rel="noreferrer">View research repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">Python</span>
+              <span class="tag hot">PyTorch</span>
+              <span class="tag">mBERT</span>
+              <span class="tag">MuRIL</span>
+              <span class="tag">NLP</span>
+            </div>
+          </article>
+
+          <article class="card mid tilt has-link">
+            <div class="card-top"><span>002 / program</span><span class="status">02 of 10 active</span></div>
+            <h3>TARQ physical reasoning robot</h3>
+            <p>
+              A ten-project curriculum from transformer internals to a 6-DOF Raspberry Pi arm with vision, local reasoning, uncertainty questions, and code-level safety gates.
+            </p>
+            <button class="card-action curriculum-trigger" type="button" aria-controls="tarq-curriculum" aria-expanded="false">Open all 10 projects &#8595;</button>
+            <div class="tags">
+              <span class="tag hot">Raspberry Pi</span>
+              <span class="tag">Moondream</span>
+              <span class="tag">Llama</span>
+              <span class="tag">FastAPI</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>003 / internals</span><span class="status">done</span></div>
+            <h3>Transformer from scratch</h3>
+            <p>
+              A character-level GPT-style transformer built by hand: embeddings, positional encoding, causal attention, residual blocks, training, perplexity, and sampling.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/character-transformer-from-scratch" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">PyTorch</span>
+              <span class="tag">Attention</span>
+              <span class="tag">Tiny Shakespeare</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>004 / local agent</span><span>prototype</span></div>
+            <h3>Lumen desktop agent</h3>
+            <p>
+              A local-first macOS agent with planning, tool use, voice input, confirmation gates, and a native state-aware presence layer.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/Lumen" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">Python</span>
+              <span class="tag">Ollama</span>
+              <span class="tag">MLX Whisper</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>005 / grounded AI</span><span>mvp</span></div>
+            <h3>DecisionCitation</h3>
+            <p>
+              A local referee-call explainer grounded in the IFAB Laws of the Game, using page-aware retrieval and a local language model.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/DECISIONCITATION" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">Python</span>
+              <span class="tag">BM25</span>
+              <span class="tag">Ollama</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>006 / computer vision</span><span>working build</span></div>
+            <h3>HandTracking controller</h3>
+            <p>
+              Browser-visible MediaPipe hand tracking with pinch-to-grab window movement, smoothing, deadzones, and velocity-sensitive control.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/HandTracking" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">OpenCV</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">Flask</span>
+            </div>
+          </article>
+
+          <article class="card small tilt has-link">
+            <div class="card-top"><span>007 / embedded</span><span class="status">done</span></div>
+            <h3>ESP32 touch diagnostic</h3>
+            <p>
+              A PlatformIO diagnostic for raw XPT2046 touch coordinates and pressure on an ESP32 touchscreen, with display and serial output.
+            </p>
+            <a class="card-action" href="https://github.com/OmTheLast/esp32-touch-pressure-diagnostic" target="_blank" rel="noreferrer">View repo &#8599;</a>
+            <div class="tags">
+              <span class="tag hot">C++</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">SPI</span>
+            </div>
+          </article>
+        </div>
+
+        <details class="curriculum" id="tarq-curriculum">
+          <summary>
+            <span class="curriculum-index">TARQ / 10</span>
+            <span><strong>Open the complete build sequence</strong><span>One continuous path from first-principles ML to a physical reasoning robot.</span></span>
+            <span class="curriculum-toggle">Expand +</span>
+          </summary>
+          <div class="curriculum-list">
+            <article class="curriculum-item done">
+              <div class="curriculum-number">01</div>
+              <div class="curriculum-copy">
+                <h3>Neural Networks from Scratch</h3>
+                <p>Build a decoder-only transformer by hand: embeddings, attention, residual blocks, training loops, evaluation, and generation.</p>
+              </div>
+              <div class="curriculum-meta"><span class="curriculum-status">complete</span><a class="curriculum-link" href="https://github.com/OmTheLast/character-transformer-from-scratch" target="_blank" rel="noreferrer">GitHub &#8599;</a></div>
+            </article>
+            <article class="curriculum-item active">
+              <div class="curriculum-number">02</div>
+              <div class="curriculum-copy">
+                <h3>Data Analysis and the Scientific Method</h3>
+                <p>Analyze AG News, establish a TF-IDF baseline, evaluate with confusion matrices, F1 and ROC curves, inspect errors with LIME, and write the result.</p>
+              </div>
+              <div class="curriculum-meta"><span class="curriculum-status">active</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">03</div>
+              <div class="curriculum-copy"><h3>Build and Deploy an API</h3><p>Serve the Project 2 classifier with FastAPI and Pydantic, test it with pytest, containerize it with Docker, and deploy it through Railway and AWS Lightsail.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">04</div>
+              <div class="curriculum-copy"><h3>Computer Vision Fundamentals</h3><p>Move from CNN fundamentals and filter visualization to CIFAR-10, ResNet-18 transfer learning, YOLO, and real-time webcam detection.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">05</div>
+              <div class="curriculum-copy"><h3>Train a Small Language Model</h3><p>Implement byte-pair encoding, curate a Simple English Wikipedia corpus, train a BPE transformer, and test scaling and domain adaptation.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">06</div>
+              <div class="curriculum-copy"><h3>Robotics Simulation</h3><p>Learn MDPs and the Bellman equation, compare PPO and SAC, and train a Kuka iiwa arm in PyBullet using reward shaping and curriculum learning.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">07</div>
+              <div class="curriculum-copy"><h3>Perception and Planning Integration</h3><p>Connect a virtual camera to the arm through OpenCV detection, pixel-to-world mapping, homography, planning, inverse kinematics, and closed-loop execution.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">08</div>
+              <div class="curriculum-copy"><h3>TARQ Software Prototype</h3><p>Assemble offline speech, vision, local reasoning, structured prompts, ambiguity detection, active learning, and independent safety interlocks before hardware.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">09</div>
+              <div class="curriculum-copy"><h3>TARQ Physical Capstone</h3><p>Build the Raspberry Pi 5 robot, calibrate its camera, solve and validate inverse kinematics, control six servos, and demonstrate safe failure handling.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+            <article class="curriculum-item">
+              <div class="curriculum-number">10</div>
+              <div class="curriculum-copy"><h3>Unsupervised Learning and Classical ML</h3><p>Implement and compare PCA, t-SNE, UMAP, k-Means, Gaussian mixtures, expectation-maximization, and support vector machines.</p></div>
+              <div class="curriculum-meta"><span class="curriculum-status">queued</span></div>
+            </article>
+          </div>
+          <p class="curriculum-note">GitHub links appear only when a public repository exists. Project 1 is published; Project 2 is currently being built locally.</p>
+        </details>
+      </section>
+
+      <section class="section revealable" id="trajectory">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ build trajectory</p>
+            <h2>Language to hardware to embodied action.</h2>
+          </div>
+          <p>
+            The through-line is simple: understand the model, learn to evaluate it honestly, connect the components into a system, then put intelligence into the physical world.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="rail">Project pipeline<br><br>2026 / AY 2027-28</div>
+          <div class="steps">
+            <div class="step done">
+              <div class="step-code">PHASE 01</div>
+              <div class="step-title"><strong>Neural foundations</strong><span>Research with pretrained models, then rebuild a transformer from its tensor operations upward.</span></div>
+              <div class="step-state">complete</div>
+            </div>
+            <div class="step live">
+              <div class="step-code">PHASE 02</div>
+              <div class="step-title"><strong>Evaluation discipline</strong><span>Project 2: AG News analysis, baselines, error inspection, explainability, and written evidence.</span></div>
+              <div class="step-state">active</div>
+            </div>
+            <div class="step">
+              <div class="step-code">PHASE 03</div>
+              <div class="step-title"><strong>Deployed perception</strong><span>APIs, computer vision, a small language model, and the interfaces that make components cooperate.</span></div>
+              <div class="step-state">queued</div>
+            </div>
+            <div class="step">
+              <div class="step-code">PHASE 04</div>
+              <div class="step-title"><strong>Embodied reasoning</strong><span>Simulation, planning, voice and vision, safety gates, then the physical TARQ arm.</span></div>
+              <div class="step-state">queued</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section revealable" id="stack">
+        <div class="section-head">
+          <div>
+            <p class="kicker">/ stack map</p>
+            <h2>Comfortable across the messy layers.</h2>
+          </div>
+          <p>
+            The current skill stack is intentionally uneven: strong where projects are done, grey-boxed where the next builds will force depth.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card small tilt">
+            <div class="card-top"><span>languages</span><span>core</span></div>
+            <h3>Python C++ Bash</h3>
+            <p>Research pipelines, local tools, computer vision systems, automation, and embedded diagnostics.</p>
+            <div class="tags"><span class="tag hot">Python</span><span class="tag">C++</span><span class="tag">Bash</span></div>
+          </article>
+          <article class="card small tilt">
+            <div class="card-top"><span>models</span><span>applied</span></div>
+            <h3>Transformers VLMs CV</h3>
+            <p>mBERT, MuRIL, Moondream, Llama, OpenCV, and from-scratch internals.</p>
+            <div class="tags"><span class="tag hot">PyTorch</span><span class="tag">OpenCV</span><span class="tag">Ollama</span></div>
+          </article>
+          <article class="card small tilt">
+            <div class="card-top"><span>systems</span><span>next</span></div>
+            <h3>Agents APIs Embedded Systems</h3>
+            <p>FastAPI services, local inference, guarded tool use, ESP32 hardware, and the path toward Raspberry Pi control loops.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">ESP32</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section revealable" id="contact">
+        <div class="contact">
+          <div>
+            <p class="kicker">/ contact</p>
+            <h2>Research groups, admissions offices, curious builders.</h2>
+            <p>
+              The current mission: build serious proof, document the failed attempts, and make the path from idea to working system visible.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">Open GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Portfolio system / live build</span>
+      <span>Om Patnaik - 2026</span>
+    </footer>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const canvas = document.getElementById("field");
+    const ctx = canvas.getContext("2d");
+    const progress = document.getElementById("progress");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let raf = 0;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = Math.max(44, Math.min(110, Math.floor((width * height) / 15000)));
+      particles = Array.from({ length: count }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.42,
+        vy: (Math.random() - 0.5) * 0.42,
+        r: index % 7 === 0 ? 1.7 : 1
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(223, 255, 63, 0.72)";
+      ctx.strokeStyle = "rgba(119, 220, 255, 0.13)";
+      ctx.lineWidth = 1;
+
+      for (const p of particles) {
+        if (!reduceMotion) {
+          p.x += p.vx;
+          p.y += p.vy;
+        }
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+        if (p.y < -10) p.y = height + 10;
+        if (p.y > height + 10) p.y = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 120) {
+            ctx.globalAlpha = (1 - distance / 120) * 0.75;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+    }
+
+    function updateScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const amount = max > 0 ? window.scrollY / max : 0;
+      progress.style.transform = `scaleX(${amount})`;
+    }
+
+    function onPointerMove(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+      root.style.setProperty("--mx", `${x}px`);
+      root.style.setProperty("--my", `${y}px`);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      }
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".revealable").forEach((node) => observer.observe(node));
+
+    document.querySelectorAll(".tilt").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        if (reduceMotion || window.innerWidth < 780) return;
+        const rect = card.getBoundingClientRect();
+        const rx = ((event.clientY - rect.top) / rect.height - 0.5) * -8;
+        const ry = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    const curriculum = document.getElementById("tarq-curriculum");
+    const curriculumTrigger = document.querySelector(".curriculum-trigger");
+
+    function syncCurriculumState() {
+      const isOpen = curriculum.open;
+      curriculumTrigger.setAttribute("aria-expanded", String(isOpen));
+      curriculum.querySelector(".curriculum-toggle").textContent = isOpen ? "Collapse -" : "Expand +";
+    }
+
+    curriculumTrigger.addEventListener("click", () => {
+      curriculum.open = true;
+      syncCurriculumState();
+      curriculum.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    });
+
+    curriculum.addEventListener("toggle", syncCurriculumState);
+    syncCurriculumState();
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    resize();
+    updateScroll();
+    draw();
+
+    if (reduceMotion) {
+      cancelAnimationFrame(raf);
+      draw();
+    }
+  </script>
+</body>
+</html>
