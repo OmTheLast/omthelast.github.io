@@ -3,404 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Om Patnaik builds local-first AI tools, interactive learning systems, and reliable software.">
-  <title>Om Patnaik | Builder</title>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
-
-    :root {
-      --bg: #070807;
-      --text: #f0f3eb;
-      --muted: #9ca397;
-      --acid: #dfff3f;
-      --red: #ff5c58;
-      --cyan: #79ddff;
-      --line: rgba(240, 243, 235, 0.14);
-      --display: "Space Grotesk", system-ui, sans-serif;
-      --mono: "IBM Plex Mono", ui-monospace, monospace;
-      --pad: clamp(1rem, 4vw, 3.5rem);
-      --mx: 50vw;
-      --my: 42vh;
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body { min-height: 100%; }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background: var(--bg);
-      font-family: var(--mono);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      pointer-events: none;
-      background:
-        radial-gradient(22rem circle at var(--mx) var(--my), rgba(223, 255, 63, 0.11), transparent 58%),
-        repeating-linear-gradient(180deg, transparent 0, transparent 3px, rgba(240, 243, 235, 0.018) 4px);
-      mix-blend-mode: screen;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      pointer-events: none;
-      background: var(--acid);
-      transform: translateY(101%);
-      transition: transform 540ms var(--ease);
-    }
-
-    body.leaving::after { transform: translateY(0); }
-
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-
-    a:focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 4px;
-    }
-
-    .site-header {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 40;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      min-height: 4.5rem;
-      padding: 0 var(--pad);
-      border-bottom: 1px solid var(--line);
-      background: rgba(7, 8, 7, 0.68);
-      backdrop-filter: blur(14px);
-    }
-
-    .brand {
-      color: var(--acid);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .header-meta {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.8rem, 2.4vw, 2rem);
-      color: var(--muted);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-    }
-
-    .availability {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .availability::before {
-      content: "";
-      width: 0.45rem;
-      height: 0.45rem;
-      background: var(--acid);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--acid);
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes pulse { 50% { opacity: 0.35; } }
-
-    main {
-      position: relative;
-      display: grid;
-      min-height: 100svh;
-      padding: 6.5rem var(--pad) 2.2rem;
-      overflow: hidden;
-      isolation: isolate;
-      background:
-        linear-gradient(rgba(121, 221, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(121, 221, 255, 0.045) 1px, transparent 1px);
-      background-size: clamp(3.7rem, 8vw, 8rem) clamp(3.7rem, 8vw, 8rem);
-    }
-
-    main::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 34%;
-      z-index: -1;
-      background: linear-gradient(transparent, var(--bg));
-    }
-
-    .back-name {
-      position: absolute;
-      inset: 14vh auto auto var(--pad);
-      z-index: -1;
-      margin: 0;
-      color: var(--text);
-      font-family: var(--display);
-      font-size: clamp(5.5rem, 17vw, 17rem);
-      font-weight: 600;
-      line-height: 0.72;
-      letter-spacing: 0;
-      text-transform: uppercase;
-      white-space: nowrap;
-      animation: name-in 900ms var(--ease) both;
-    }
-
-    .back-name span {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(240, 243, 235, 0.28);
-    }
-
-    @keyframes name-in {
-      from { opacity: 0; transform: translateX(-4rem); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(16rem, 0.72fr) minmax(22rem, 1fr);
-      gap: clamp(2rem, 7vw, 8rem);
-      align-items: end;
-      width: min(84rem, 100%);
-      margin: auto;
-    }
-
-    figure {
-      position: relative;
-      width: min(27vw, 24rem);
-      min-width: 17rem;
-      aspect-ratio: 4 / 5;
-      align-self: center;
-      margin: 0;
-      overflow: hidden;
-      border: 1px solid rgba(223, 255, 63, 0.55);
-      background: #111;
-      box-shadow: 0 0 70px rgba(223, 255, 63, 0.08);
-      animation: portrait-in 900ms 100ms var(--ease) both;
-    }
-
-    @keyframes portrait-in {
-      from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(1.5rem); }
-      to { opacity: 1; clip-path: inset(0); transform: none; }
-    }
-
-    figure::before {
-      content: "PROFILE / 01";
-      position: absolute;
-      inset: 0.75rem auto auto 0.75rem;
-      z-index: 2;
-      padding: 0.35rem 0.45rem;
-      color: var(--bg);
-      background: var(--acid);
-      font-size: 0.58rem;
-      font-weight: 600;
-    }
-
-    figure::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 55%, rgba(7, 8, 7, 0.72));
-      pointer-events: none;
-    }
-
-    figure img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(1) contrast(1.09);
-      transform: scale(1.14);
-    }
-
-    figcaption {
-      position: absolute;
-      inset: auto 0.9rem 0.85rem;
-      z-index: 2;
-      display: flex;
-      justify-content: space-between;
-      color: rgba(240, 243, 235, 0.78);
-      font-size: 0.58rem;
-      text-transform: uppercase;
-    }
-
-    .intro {
-      align-self: end;
-      padding-bottom: clamp(1rem, 5vh, 4.5rem);
-      animation: intro-in 850ms 230ms var(--ease) both;
-    }
-
-    @keyframes intro-in {
-      from { opacity: 0; transform: translateY(2rem); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .kicker {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin: 0 0 1.2rem;
-      color: var(--acid);
-      font-size: 0.68rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 2.6rem;
-      height: 0.42rem;
-      background: var(--red);
-      box-shadow: 0 0 18px rgba(255, 92, 88, 0.45);
-    }
-
-    h1 {
-      max-width: 13ch;
-      margin: 0;
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 6vw, 6rem);
-      font-weight: 600;
-      line-height: 0.96;
-      letter-spacing: 0;
-    }
-
-    h1 strong { color: var(--acid); font-weight: inherit; }
-
-    .bio {
-      max-width: 44rem;
-      margin: 1.6rem 0 0;
-      color: var(--muted);
-      font-size: clamp(0.82rem, 1.25vw, 1rem);
-      line-height: 1.85;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 2rem;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 3.15rem;
-      padding: 0 1.25rem;
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: rgba(7, 8, 7, 0.68);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms var(--ease);
-    }
-
-    .button.primary {
-      color: var(--bg);
-      border-color: var(--acid);
-      background: var(--acid);
-      box-shadow: 0 0 28px rgba(223, 255, 63, 0.12);
-    }
-
-    .button:hover { transform: translateY(-2px); border-color: var(--acid); }
-    .button.primary:hover { color: var(--acid); background: var(--bg); }
-
-    .page-note {
-      position: absolute;
-      right: var(--pad);
-      bottom: 2rem;
-      color: #62685f;
-      font-size: 0.58rem;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 860px) {
-      .layout { grid-template-columns: minmax(12rem, 0.65fr) minmax(18rem, 1fr); gap: 2rem; }
-      figure { width: min(34vw, 19rem); min-width: 13rem; }
-    }
-
-    @media (max-width: 620px) {
-      .availability { display: none; }
-      main { min-height: 100svh; padding-top: 6rem; }
-      .layout { grid-template-columns: 1fr; align-content: end; gap: 1.5rem; }
-      .back-name { top: 7.2rem; font-size: clamp(4.2rem, 25vw, 7.4rem); }
-      figure { width: min(56vw, 13.5rem); min-width: 0; margin-left: auto; }
-      .intro { padding-bottom: 0; }
-      h1 { max-width: 12ch; font-size: clamp(2.6rem, 12vw, 4.2rem); }
-      .bio { font-size: 0.75rem; line-height: 1.7; }
-      .actions { margin-top: 1.35rem; }
-      .page-note { display: none; }
-    }
-
-    @media (pointer: coarse) {
-      body::before { background: repeating-linear-gradient(180deg, transparent 0, transparent 3px, rgba(240, 243, 235, 0.018) 4px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
-  </style>
+  <meta name="description" content="Om Patnaik builds local-first AI tools, interactive learning systems, and machine learning projects.">
+  <title>Om Patnaik</title>
+  <link rel="stylesheet" href="assets/landing-v5/site.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="./">Om Patnaik / Delhi</a>
-    <div class="header-meta">
-      <span class="availability">Building now</span>
-      <a href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <div class="shell header-inner">
+      <a class="site-name" href="./">om patnaik</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a aria-current="page" href="./">About</a>
+        <a href="./projects.html">Projects</a>
+        <a href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <p class="back-name" aria-hidden="true">OM <span>PATNAIK</span></p>
-
-    <div class="layout">
-      <figure>
-        <img src="assets/landing-v4/om-avatar.jpg" width="288" height="288" alt="Portrait of Om Patnaik">
-        <figcaption><span>New Delhi</span><span>2026</span></figcaption>
-      </figure>
-
-      <section class="intro" aria-labelledby="hero-title">
-        <p class="kicker">Class XII · Builder · Researcher</p>
-        <h1 id="hero-title">Hi, I’m Om. I build ideas until they <strong>work.</strong></h1>
-        <p class="bio">I build local-first AI tools and interactive learning systems that make difficult ideas easier to understand and use. My work moves between machine learning, software, physics, and hardware.</p>
-        <div class="actions">
-          <a class="button primary page-transition" href="./projects.html#projects">View projects →</a>
-          <a class="button" href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <div class="shell">
+      <section class="profile" aria-labelledby="page-title">
+        <img class="avatar" src="assets/landing-v4/om-avatar.jpg" width="288" height="288" alt="Om Patnaik's GitHub profile picture">
+        <div>
+          <p class="label">New Delhi · Class XII</p>
+          <h1 id="page-title">Om Patnaik</h1>
+          <p class="intro">I build local-first AI tools and interactive learning systems. I am interested in machine learning, robotics, physics, and software that is understandable enough to inspect and improve.</p>
+          <div class="plain-links">
+            <a href="./projects.html">View projects →</a>
+            <a href="mailto:patnaikom8@gmail.com">Email</a>
+            <a href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
         </div>
       </section>
-    </div>
 
-    <p class="page-note">01 / Introduction · 02 / Projects</p>
+      <section class="section section-grid" aria-labelledby="now-title">
+        <h2 id="now-title">Currently</h2>
+        <div class="section-copy">
+          <p>I am working on a numbered series of focused machine learning projects. Each one is meant to teach me something specific and produce a working result.</p>
+          <p>Projects 01–03 are complete: a transformer built from scratch, a data-first analysis of AG News, and a tested API that serves the resulting classifier.</p>
+        </div>
+      </section>
+
+      <section class="section section-grid" aria-labelledby="interests-title">
+        <h2 id="interests-title">Interests</h2>
+        <div class="section-copy">
+          <p>Local and privacy-preserving agents, applied NLP for Indian and code-mixed languages, interactive tools for science, and reliable software with clear evaluation and safety boundaries.</p>
+        </div>
+      </section>
+
+      <section class="section section-grid" aria-labelledby="details-title">
+        <h2 id="details-title">Details</h2>
+        <dl class="facts">
+          <div><dt>Based in</dt><dd>New Delhi, India</dd></div>
+          <div><dt>Languages</dt><dd>Python, TypeScript, JavaScript</dd></div>
+          <div><dt>Working with</dt><dd>PyTorch, FastAPI, React, hardware</dd></div>
+        </dl>
+      </section>
+    </div>
   </main>
 
-  <script>
-    const root = document.documentElement;
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!reduceMotion && matchMedia("(pointer: fine)").matches) {
-      addEventListener("pointermove", (event) => {
-        root.style.setProperty("--mx", `${event.clientX}px`);
-        root.style.setProperty("--my", `${event.clientY}px`);
-      }, { passive: true });
-    }
-
-    document.querySelector(".page-transition").addEventListener("click", (event) => {
-      if (reduceMotion || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      const destination = event.currentTarget.href;
-      document.body.classList.add("leaving");
-      setTimeout(() => { location.href = destination; }, 430);
-    });
-  </script>
+  <footer class="site-footer">
+    <div class="shell footer-inner"><span>ompatnaik.com</span><span>Last updated August 2026</span></div>
+  </footer>
 </body>
 </html>
