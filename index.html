@@ -64,5 +64,13 @@
   <footer class="site-footer">
     <div class="shell footer-inner"><span>ompatnaik.com</span><span>Last updated August 2026</span></div>
   </footer>
+  <script>
+    if (matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)").matches) {
+      addEventListener("pointermove", ({ clientX, clientY }) => {
+        document.documentElement.style.setProperty("--mouse-x", `${clientX}px`);
+        document.documentElement.style.setProperty("--mouse-y", `${clientY}px`);
+      }, { passive: true });
+    }
+  </script>
 </body>
 </html>

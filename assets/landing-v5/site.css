@@ -10,6 +10,8 @@
   --accent: #dfff3f;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
   --sans: "Inter", system-ui, sans-serif;
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
 }
 
 * { box-sizing: border-box; }
@@ -31,6 +33,21 @@ body {
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.65;
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: radial-gradient(
+      300px circle at var(--mouse-x) var(--mouse-y),
+      rgba(223, 255, 63, 0.06),
+      transparent 70%
+    );
+  }
 }
 
 a {
