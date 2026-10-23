@@ -1,16 +1,19 @@
 {
   "source": "https://github.com/OmTheLast/LlamaJEE.js",
   "canonical": "https://ompatnaik.com/llamajee/",
-  "model": "Unchanged Qwen3.5-0.8B ONNX; trained 9B export pending",
+  "model_repo": "OmTheLast/LlamaJEE-9B-ONNX-WebGPU",
+  "model_revision": "81f9f6a2591a348994e655a8ea8302c392b9dce2",
+  "runtime": "custom ONNX Runtime WebGPU + Transformers.js tokenizer",
+  "archived_adapters": 5,
+  "scope": "Experimental; synthetic conversion checks, not JEE accuracy",
   "sha256": {
-    "index.html": "8f28fade120d2de3188f6449dc8f1257233dfbb5c3d93c93acbbe581454eee86",
+    "index.html": "62b6d4f83a4ad9b6882dcf16d057f22c6af4e6cc84714a1df3f46f9e8258eaeb",
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "charts/training_trajectories.png": "8d2f197f6a463544afe174e762f574efc01af697a1f1449c0f54f6a49f38f1f4",
     "charts/latest_tradeoffs.png": "2d66d376d1d31df5af472b81bcf3e3f70b0d99192280c4943a1241b9026befb1",
-    "assets/index-DxdtheWs.js": "4a738cdc614c14dbbfa68872730817c42b33dcac6edd84b95c431dbeaf2679d7",
-    "assets/index-C7vTbZVH.js": "3fad5fc6eff0e32d7f4dfba18d621e000ce70141956ffe180c743fe3443f1f2e",
     "assets/index-7g9vbL4s.css": "81e35a82dae48939150074bf917d7544854170db3a503b4c9f21c703fcbad46b",
     "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082",
-    "assets/model.worker-STCBvt6t.js": "5c8941ab60147c934147f1d263e26170b56c3d176df83da1dce7f3063a72fe05",
-    "assets/index-DT_BAbyc.css": "5a0ae9962f0b39a8ca9903aff6740f06e3e3d6787a5575119973174ebb7370ef"
+    "assets/index-Ckd-GXtD.js": "7e9fa014be80579ce3a12e6270cc0b8c1a5d5785917e544579ecf13115f618a3",
+    "assets/model.worker-9Xeh-nL4.js": "9a12e803e9238f0c438b3ce461cdd002ab77f519ebc59a8aa56e660b86c048c1"
   }
 }
