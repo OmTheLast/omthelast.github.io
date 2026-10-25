@@ -3,97 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Projects by Om Patnaik in machine learning, interactive systems, software, and hardware.">
   <title>Projects | Om Patnaik</title>
-  <link rel="stylesheet" href="assets/landing-v5/site.css">
+  <meta name="description" content="Selected research, browser systems, local tools, and earlier learning projects by Om Patnaik.">
+  <meta name="theme-color" content="#080908">
+  <link rel="canonical" href="https://ompatnaik.com/projects.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Om Patnaik">
+  <meta property="og:title" content="Projects | Om Patnaik">
+  <meta property="og:description" content="Selected research, browser systems, local tools, and earlier learning projects by Om Patnaik.">
+  <meta property="og:url" content="https://ompatnaik.com/projects.html">
+  <meta property="og:image" content="https://ompatnaik.com/assets/landing-v4/om-avatar.jpg">
+  <meta property="og:image:alt" content="Om Patnaik’s profile illustration">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/landing-v5/site.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="site-name" href="./">om patnaik</a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="./">About</a>
-        <a aria-current="page" href="./projects.html">Projects</a>
-        <a href="https://github.com/OmTheLast" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="shell">
-      <header class="page-head">
-        <p class="label">Selected work</p>
-        <h1>Projects</h1>
-        <p>Projects are listed with their current state and source code. GitHub contains the full history, experiments, and smaller repositories.</p>
-      </header>
-
-      <section class="project-group" aria-labelledby="series-title">
-        <div class="group-head">
-          <h2 id="series-title">ML project series</h2>
-          <p>A numbered series of focused machine learning projects. Projects are added here as the work is completed.</p>
-        </div>
-        <div class="project-list">
-          <article class="project-row">
-            <span class="project-index">01</span>
-            <div><h3 class="project-title">Transformer from scratch</h3><div class="project-status">Complete</div></div>
-            <p class="project-description">A character-level GPT-style transformer implemented in PyTorch, including attention, positional encoding, training, evaluation, and generation.</p>
-            <a class="project-link" href="https://github.com/OmTheLast/character-transformer-from-scratch" target="_blank" rel="noreferrer">Source ↗</a>
-          </article>
-          <article class="project-row">
-            <span class="project-index">02</span>
-            <div><h3 class="project-title">Data analysis and scientific method</h3><div class="project-status">Complete</div></div>
-            <p class="project-description">AG News analysis with pre-model hypotheses, TF-IDF and logistic regression, error analysis, ROC/AUC, and LIME. Test accuracy: 91.78%.</p>
-            <a class="project-link" href="https://github.com/OmTheLast/ag-news-data-analysis" target="_blank" rel="noreferrer">Source ↗</a>
-          </article>
-          <article class="project-row">
-            <span class="project-index">03</span>
-            <div><h3 class="project-title">News classifier API</h3><div class="project-status">Complete</div></div>
-            <p class="project-description">The Project 2 model served through FastAPI with Pydantic validation, tests, Docker, model documentation, and a Railway deployment.</p>
-            <a class="project-link" href="https://github.com/OmTheLast/news-classifier-api" target="_blank" rel="noreferrer">Source ↗</a>
-          </article>
-          <article class="project-row">
-            <span class="project-index">04</span>
-            <div><h3 class="project-title">Next project</h3><div class="project-status" style="color:var(--faint)">In progress</div></div>
-            <p class="project-description">The next entry will be added when there is working code and something useful to report.</p>
-            <span></span>
-          </article>
-        </div>
-      </section>
-
-      <section class="project-group" aria-labelledby="other-title">
-        <div class="group-head">
-          <h2 id="other-title">Other work</h2>
-          <p>Research, local tools, learning environments, and hardware experiments.</p>
-        </div>
-        <div class="repo-list">
-          <article class="repo-row"><h3>Tactical Style Fingerprint</h3><p>Five transparent event-data dimensions for comparing Premier League teams, with tactical neighbours and grounded AI explanations.</p><a href="https://github.com/OmTheLast/tactical-style-fingerprint" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>Hinglish hate-speech research</h3><p>Cross-dataset comparison of mBERT and MuRIL for code-mixed language.</p><a href="https://github.com/OmTheLast/mBERT-vs-MuRIL-cross-dataset-hinglish-hate" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>Lumen</h3><p>A local-first macOS desktop agent with local model discovery and safety confirmations.</p><a href="https://github.com/OmTheLast/Lumen" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>TwistLab</h3><p>An interactive WebGL environment for learning twisty-puzzle notation and algorithms.</p><a href="https://github.com/OmTheLast/TwistLab" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>Drishya Physics</h3><p>An interactive mechanics lab with an analytical solver and conservation tests.</p><a href="https://github.com/OmTheLast/Drishya" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>Football Rule Cite</h3><p>A retrieval tool that explains football decisions using the IFAB Laws of the Game.</p><a href="https://github.com/OmTheLast/DECISIONCITATION" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>ESP32 touch diagnostic</h3><p>A raw coordinate and pressure diagnostic for an ESP32 resistive touchscreen.</p><a href="https://github.com/OmTheLast/esp32-touch-pressure-diagnostic" target="_blank" rel="noreferrer">Source ↗</a></article>
-          <article class="repo-row"><h3>EngineerCheck</h3><p>A recent TypeScript project exploring practical engineering evaluation.</p><a href="https://github.com/OmTheLast/engineercheck" target="_blank" rel="noreferrer">Source ↗</a></article>
-        </div>
-      </section>
-
-      <section class="section section-grid" aria-labelledby="more-title">
-        <h2 id="more-title">More</h2>
-        <div class="section-copy"><p><a href="https://github.com/OmTheLast?tab=repositories" target="_blank" rel="noreferrer">Browse all public repositories on GitHub ↗</a></p></div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-inner"><a href="./">← About</a><span>Last updated August 2026</span></div>
-  </footer>
-  <script>
-    if (matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)").matches) {
-      addEventListener("pointermove", ({ clientX, clientY }) => {
-        document.documentElement.style.setProperty("--mouse-x", `${clientX}px`);
-        document.documentElement.style.setProperty("--mouse-y", `${clientY}px`);
-      }, { passive: true });
-    }
-  </script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="shell header-inner">
+    <a class="site-name" href="/">om patnaik</a>
+    <nav class="nav" aria-label="Primary navigation"><a href="/">About</a><a href="/projects.html" aria-current="page">Projects</a><a href="https://github.com/OmTheLast">GitHub</a></nav>
+  </div></header>
+  <main id="main" tabindex="-1"><div class="shell">
+<header class="page-head"><p class="label">Selected work</p><h1>Projects</h1><p>Start with the research and systems below. Each case study connects the problem, implementation, evidence, and remaining questions.</p></header>
+<nav class="jump-links" aria-label="Project groups"><a href="#featured">Research &amp; systems</a><a href="#built">Built projects</a><a href="#earlier">Earlier work</a></nav>
+<section id="featured" class="project-group"><div class="section-heading"><h2>Featured Research &amp; Systems</h2></div><div class="featured-list"><article class="feature-card">
+      <div><p class="label">Browser systems · Model evaluation</p><h3><a href="/jee/">LlamaJEE.js<span aria-hidden="true"> ↗</span></a></h3></div>
+      <div><p>A local JEE solver in the browser, with a documented record of fine-tuning and model conversion.</p><p class="finding">7/12 → 8/12 on reused development questions; procedure scores fell. No adapter promoted.</p><a class="read-link" href="/jee/">Read case study <span class="sr-only">— LlamaJEE.js</span> →</a></div>
+    </article><article class="feature-card">
+      <div><p class="label">Reproducible experiments</p><h3><a href="/tokenizers/">Comparative Tokenizer Study<span aria-hidden="true"> ↗</span></a></h3></div>
+      <div><p>How language, text format, and tokenizer configuration change the space a prompt needs.</p><p class="finding">1,120 saved encodings agree between Python and JavaScript.</p><a class="read-link" href="/tokenizers/">Read case study <span class="sr-only">— Comparative Tokenizer Study</span> →</a></div>
+    </article><article class="feature-card">
+      <div><p class="label">Applied NLP · Error analysis</p><h3><a href="/hinglish/">mBERT vs MuRIL<span aria-hidden="true"> ↗</span></a></h3></div>
+      <div><p>What happens when a harmful-speech classifier meets a different dataset and label policy.</p><p class="finding">Three datasets, three seeds; the model ranking changes with the dataset.</p><a class="read-link" href="/hinglish/">Read case study <span class="sr-only">— mBERT vs MuRIL</span> →</a></div>
+    </article></div></section>
+<section id="built" class="project-group"><div class="section-heading"><h2>Other Built Projects</h2><p>Tools for learning, local computing, and inspecting model behavior.</p></div><div class="repo-list"><article class="repo-row"><div><h3><a href="/projects/drishya/">Drishya Physics</a></h3><p class="project-status">Browser application</p></div><p>Interactive mechanics, analytical solvers, and checks against conservation laws.</p><a href="/projects/drishya/">Project notes <span class="sr-only">— Drishya Physics</span> →</a></article><article class="repo-row"><div><h3><a href="/projects/contextfair/">ContextFair</a></h3><p class="project-status">Browser application</p></div><p>Inspect which messages fit a context budget; compare estimates with exact Qwen content counts.</p><a href="/projects/contextfair/">Project notes <span class="sr-only">— ContextFair</span> →</a></article><article class="repo-row"><div><h3><a href="/projects/lumen/">Lumen</a></h3><p class="project-status">Desktop prototype</p></div><p>A local macOS agent with model discovery, voice options, and approval prompts.</p><a href="/projects/lumen/">Project notes <span class="sr-only">— Lumen</span> →</a></article><article class="repo-row"><div><h3><a href="/projects/football-rule-cite/">Football Rule Cite</a></h3><p class="project-status">Static preview · Local inference</p></div><p>Retrieve IFAB law excerpts and inspect cited explanations of a stated call.</p><a href="/projects/football-rule-cite/">Project notes <span class="sr-only">— Football Rule Cite</span> →</a></article><article class="repo-row"><div><h3><a href="/projects/twistlab/">TwistLab</a></h3><p class="project-status">Browser application</p></div><p>Explore cube notation, animated algorithms, and lessons tied to the current scramble.</p><a href="/projects/twistlab/">Project notes <span class="sr-only">— TwistLab</span> →</a></article></div>
+<p class="more-link"><a href="https://github.com/OmTheLast/tactical-style-fingerprint">Tactical Style Fingerprint</a> — event-data comparisons of football teams. <a href="https://github.com/OmTheLast/engineercheck">EngineerCheck</a> — an engineering evaluation experiment.</p></section>
+<section id="earlier" class="project-group"><div class="section-heading"><h2>Earlier Experiments &amp; Learning</h2><p>The foundations behind the newer work, kept accessible as a record of learning.</p></div><div class="repo-list"><article class="repo-row"><h3>Transformer from scratch</h3><p>A character-level GPT-style model in PyTorch: attention, training, evaluation, and generation.</p><a href="https://github.com/OmTheLast/character-transformer-from-scratch">Source <span class="sr-only">— Transformer from scratch</span> ↗</a></article><article class="repo-row"><h3>AG News analysis</h3><p>A data-first classification study using TF-IDF, logistic regression, and error analysis.</p><a href="https://github.com/OmTheLast/ag-news-data-analysis">Source <span class="sr-only">— AG News analysis</span> ↗</a></article><article class="repo-row"><h3>News Classifier API</h3><p>Serving the AG News baseline with validation, tests, and Docker. The former hosted API is currently unavailable.</p><a href="/projects/news-classifier/">Project notes <span class="sr-only">— News Classifier API</span> ↗</a></article><article class="repo-row"><h3>Earlier Hinglish comparison</h3><p>The earlier repository; the featured cross-dataset study develops this line of work further.</p><a href="https://github.com/OmTheLast/mBERT-vs-MuRIL-in-detecting-hatespeech">Source <span class="sr-only">— Earlier Hinglish comparison</span> ↗</a></article><article class="repo-row"><h3>ESP32 touch diagnostic</h3><p>Inspect raw coordinates and pressure from a resistive touchscreen.</p><a href="https://github.com/OmTheLast/esp32-touch-pressure-diagnostic">Source <span class="sr-only">— ESP32 touch diagnostic</span> ↗</a></article></div></section>
+<p class="more-link"><a href="https://github.com/OmTheLast?tab=repositories">Browse all public repositories ↗</a></p></div></main>
+  <footer class="site-footer"><div class="shell footer-inner"><a href="/projects.html">Explore all projects</a><span>Om Patnaik · October 2026</span><a href="https://github.com/OmTheLast">GitHub</a></div></footer>
 </body>
 </html>

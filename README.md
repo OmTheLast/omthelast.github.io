@@ -1,54 +1,52 @@
-<h1 align="center">Om Patnaik’s Website</h1>
+# Om Patnaik’s portfolio
 
-**Browse Om Patnaik’s projects, interests, and contact links through a small static portfolio.**
+A static technical portfolio built around inspectable systems and research evidence.
 
-[Demo or published artifacts](https://ompatnaik.com)
+[Website](https://ompatnaik.com/) · [Projects](https://ompatnaik.com/projects.html) · [GitHub](https://github.com/OmTheLast)
 
-Static HTML and CSS. No build step. Hosted with GitHub Pages and a custom domain.
+## Pages
 
-By Om Patnaik · repository created June 2026.
-
-## Install
-
-| Platform / path | Start here |
+| URL | Purpose |
 | --- | --- |
-| Browser | [Visit ompatnaik.com](https://ompatnaik.com) |
-| Local preview | `python3 -m http.server 8000 --bind 127.0.0.1` |
+| `/` | Introduction and three featured projects |
+| `/projects.html` | Featured research, other built projects, earlier learning |
+| `/jee/` | LlamaJEE.js case study and experiment limits |
+| `/llamajee/` | Existing browser solver; preserved compiled application |
+| `/tokenizers/` | Tokenizer study methods, controls, results, and limitations |
+| `/hinglish/` | mBERT/MuRIL results, transfer failures, and error analysis |
+| `/projects/drishya/` | Mechanics lab project notes |
+| `/projects/contextfair/` | Conversation planner project notes |
+| `/projects/lumen/` | Local desktop agent project notes |
+| `/projects/football-rule-cite/` | Retrieval project and static sample preview |
+| `/projects/twistlab/` | Cube simulator project notes |
+| `/projects/news-classifier/` | Earlier API project and local setup link |
 
-Open http://127.0.0.1:8000 for the profile and `/projects.html` for the project list. The hosted site is the no-install preview.
+Drishya, ContextFair, TwistLab, and Football Rule Cite are separately deployed project sites. Their routes are not directories to copy into this repository. Lumen is a desktop application with its own project website. The tokenizer and Hinglish studies have published artifacts, not hosted inference apps.
 
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1
+## Preview and verify
+
+No framework, package installation, or build step is required.
+
+```sh
+python3 -m http.server 4173 --bind 127.0.0.1
+python3 scripts/check_site.py
+python3 scripts/check_site.py --external
 ```
 
-## Why
+Open `http://127.0.0.1:4173/`. The checker covers internal routes and anchors, document structure, image text and dimensions, metadata, copied-figure hashes, and the custom domain. The optional external check requires curl and network access. It checks HTTP responses, not application correctness.
 
-You want one place to find project links and see what each one is about. This repository supplies the profile and project pages for ompatnaik.com. Its backups and drafts record earlier designs; they are not the current landing page.
+Check keyboard navigation, the three case studies, and phone/tablet/desktop widths in a browser. The solver’s model download is optional for portfolio QA; loading the interface is not proof of model inference. The October 2026 audit and validation scope are recorded in [docs/portfolio-audit.md](docs/portfolio-audit.md).
 
-## Find a project
+## Evidence and assets
 
-Open `projects.html` to browse the portfolio, then follow the repository or demo link for setup and evidence. The landing page introduces interests and provides the current contact links.
+Case-study citations link to inspected repository commits. Original charts are copied without alteration; [assets/research/sources.json](assets/research/sources.json) records source URLs and SHA-256 hashes. Tables expose the key numbers without requiring readers to inspect small chart labels. Public claims distinguish development results, computational validation, and runtime checks.
 
-## Notes from building it
+The shared stylesheet retains the existing dark palette, Inter/IBM Plex Mono typography, and restrained lime accent. Portfolio pages use semantic HTML without JavaScript. Google Fonts remain an external dependency with system-font fallbacks. Figures load lazily with explicit dimensions.
 
-I kept the site as static files so publishing does not need a build tool. The current landing page uses shared CSS while older layouts remain under backups and drafts. I would keep project descriptions synchronized with the repositories as they evolve.
+## Deployment
 
-## Commands
+GitHub Pages currently publishes `main` from the repository root. Merge the portfolio branch to publish through that existing setup. Keep `CNAME` as `ompatnaik.com` and preserve the compiled `/llamajee/` application and its pinned deployment metadata. No DNS, framework, or hosting migration is required.
 
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1  # preview the site
-```
+Merge dependent profile/project README changes after the site deploys so new case-study backlinks resolve. The old Football Rule Cite preview path was replaced with `/Football-Rule-Cite/`; the former Railway news API returned HTTP 404 and is not advertised as live.
 
-## Verify it yourself
-
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1
-```
-
-There is no automated site test suite. In the preview, open both pages, follow project links, and check a narrow viewport and reduced-motion settings; running the server alone does not test those flows.
-
-## Credits, license and pointers
-
-Website and copy by Om Patnaik, using HTML, CSS, JavaScript, and GitHub Pages. No source license file is present.
-
-[Repository history](https://github.com/OmTheLast/omthelast.github.io/commits).
+Backups and drafts remain as design history. `robots.txt` asks crawlers not to index those directories; it does not restrict access.
