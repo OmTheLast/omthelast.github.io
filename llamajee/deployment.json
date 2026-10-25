@@ -7,13 +7,14 @@
   "archived_adapters": 5,
   "scope": "Experimental; synthetic conversion checks, not JEE accuracy",
   "sha256": {
-    "index.html": "54274db6fe3696398deeaeee919226650f6a9b78ec43f88278c3bd22d642157c",
+    "index.html": "eeb8978676511a4613eff18339743a0fde678a2d845761cbaabdc6e73b529e86",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "charts/training_trajectories.png": "8d2f197f6a463544afe174e762f574efc01af697a1f1449c0f54f6a49f38f1f4",
     "charts/latest_tradeoffs.png": "2d66d376d1d31df5af472b81bcf3e3f70b0d99192280c4943a1241b9026befb1",
     "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082",
-    "assets/index-Bse7DOWq.js": "e3fb0f2a48257dbc9875297b1b4d1c8a90d6d112d2c1699922f7d99e37a93920",
     "assets/model.worker-9Xeh-nL4.js": "9a12e803e9238f0c438b3ce461cdd002ab77f519ebc59a8aa56e660b86c048c1",
-    "assets/index-UWKRWUqP.css": "6a34ae82647fe465303a33c255ac1a534de2653d84469310f3e1803f86e08b4c"
-  }
+    "assets/index-DcX89sm2.css": "6e3c9d4fe0d954aaf75bd24d0ea49812e8a62ec00573038c9b55f1edb3269c90",
+    "assets/index-D6VM1Jy2.js": "7d9059492203ef2ea93f4acb5dfe8056a11ef4631bfb171d20a6828f85c91d4a"
+  },
+  "presentation_updated": "2026-10-25"
 }
