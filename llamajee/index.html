@@ -5,37 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f8f9fa" />
   <link rel="icon" href="data:," />
-  <meta name="description" content="Om Patnaik’s experiments with small AI models for JEE problems. Run the browser solver, compare saved models, and read the training results and limitations." />
-  <title>LlamaJEE.js — JEE solver experiments by Om Patnaik</title>
+  <meta name="description" content="Choose a model, load it in your browser, and ask a JEE question using text or an image." />
+  <title>LlamaJEE.js — JEE problem solver</title>
   <link rel="canonical" href="https://ompatnaik.com/llamajee/" />
-  <script type="module" crossorigin src="./assets/index-D6VM1Jy2.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DcX89sm2.css">
+  <script type="module" crossorigin src="./assets/index-Ap14tLwP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BVuAlun6.css">
 </head>
 <body>
   <a class="skip-link" href="#solver">Skip to solver</a>
   <div id="app">
-    <header class="topbar shell">
-      <a class="brand" href="#top">LlamaJEE.js</a>
-      <nav aria-label="Main navigation"><a href="#solver">Solver</a><a href="#browser-status">Models</a><a href="#research">Results</a><a href="https://github.com/OmTheLast/LlamaJEE.js">GitHub</a></nav>
-    </header>
+    <header class="topbar shell"><a class="brand" href="#solver">LlamaJEE.js</a><span class="app-subtitle">JEE problem solver</span></header>
     <main id="top" class="shell">
-      <section class="introduction" aria-labelledby="project-title">
-        <p class="project-meta">A project by <a href="https://ompatnaik.com/">Om Patnaik</a> <span>Experimental</span></p>
-        <h1 id="project-title">Small AI models for JEE problems</h1>
-        <p class="intro-copy">This project tests whether small AI models can solve questions from JEE Main and Advanced, India’s engineering entrance exams. This page lets you run saved models in your browser and read the results of our training experiments.</p>
-        <div class="project-status"><strong>Current result</strong><p>The 9B model and five saved training versions run in the browser. Training has not yet shown a reliable improvement in JEE solving. Image answers remain unreliable, and phone support has not been verified.</p></div>
-        <p class="intro-next">To try a model, choose one below and check its download size before loading it. To understand the project first, <a href="#research">read the results</a>.</p>
-      </section>
-
       <section id="solver" class="page-section" aria-labelledby="solver-title">
-        <div class="section-heading"><h2 id="solver-title">Run a question</h2><p>Choose and load a model, then enter a question. Model files download from Hugging Face; your question is processed on this device.</p></div>
+        <div class="section-heading"><h1 id="solver-title">Solve a JEE question</h1><p>Choose a model, load it, then enter your question or add an image.</p></div>
         <div class="model-setup">
           <div class="model-selection">
             <label for="model-choice">1. Choose a model</label>
             <select id="model-choice" aria-describedby="model-detail download-size">
 <option value="base">9B · unchanged base</option><option value="coverage16-step060">9B · 30 families · 16 layers · step 60</option><option value="data60-step060">9B · 60 families · 3 layers · step 60</option><option value="reliable01-step030">9B · 30 families · 3 layers · step 30</option><option value="reliable01-step060">9B · 30 families · 3 layers · step 60</option><option value="reliable01-step090">9B · 30 families · 3 layers · step 90</option><option value="demo">0.8B · separate demo</option></select>
             <div class="model-band"><strong id="model-label"></strong><small id="model-detail"></small></div>
-            <p class="download-note"><a href="#model-labels">What do family, layer and step mean?</a></p>
           </div>
           <div class="model-loading">
             <p class="setup-label">2. Load it on this device</p>
@@ -45,7 +33,7 @@
             <div class="download-track" id="download-track" hidden><div id="download-bar"></div></div>
           </div>
         </div>
-        <p class="runtime-note">The model runs in this browser using WebGPU, which gives it access to your device’s graphics processor. No account, API key or local Python server is required. Downloads may be cached by your browser.</p>
+        <p class="runtime-note">Your question is processed on this device. Model files download when you load a model.</p>
         <div class="workspace">
           <div class="input-card card">
             <div class="card-title-row"><h3>3. Enter a question</h3></div>
@@ -64,44 +52,13 @@
           </div>
           <div class="output-card card">
             <div class="card-title-row"><h3>Model response</h3><span id="result-state" class="state-pill">Waiting</span></div>
-            <div id="result-empty" class="result-empty"><h4>No response yet</h4><p>Load a model and submit a question to see its answer and explanation here. Check the working yourself; an answer can be complete and still be wrong.</p></div>
+            <div id="result-empty" class="result-empty"><h4>No response yet</h4><p>Load a model and submit a question. Its answer and working will appear here.</p></div>
             <div id="result-content" hidden><div id="final-card" class="final-card" hidden><span>Answer from the model</span><strong id="final-answer"></strong></div><div id="format-checks" class="format-checks" hidden></div><p id="output-model" class="download-note"></p><h4 class="output-label">Model explanation</h4><pre id="raw-output"></pre></div>
           </div>
         </div>
       </section>
 
-      <section id="browser-status" class="page-section" aria-labelledby="browser-status-title">
-        <div class="section-heading"><h2 id="browser-status-title">Available models</h2><p>All options use Qwen3.5 models. LlamaJEE.js is the project name. “B” means billions of model parameters, not the download size.</p></div>
-        <div class="table-scroll" role="region" aria-label="Available models and their limits" tabindex="0"><table><thead><tr><th scope="col">Option</th><th scope="col">What it is</th><th scope="col">What to expect</th></tr></thead><tbody>
-          <tr><th scope="row">9B unchanged base</th><td>The original compressed model, with no JEE training changes from this project.</td><td>The reference used to judge whether our training helped.</td></tr>
-          <tr><th scope="row">Five trained 9B versions</th><td>Saved training checkpoints applied to the same 9B base using small updates called adapters.</td><td>Experimental results to compare with the base. None has met our criteria for a reliably better solver.</td></tr>
-          <tr><th scope="row">Separate 0.8B demo</th><td>A smaller, unchanged model with a download of about 850 MB.</td><td>A smaller browser demonstration. It is not a compressed version of our trained 9B model.</td></tr>
-        </tbody></table></div>
-        <div class="model-notes">
-          <div><h3>Download and device limits</h3><p>The 9B package is up to 5.7 GB for text and adapters, plus 1.84 GB for images. Running it also needs working memory. We tested it on a Mac with 64 GiB of memory; the minimum requirement and phone support are unverified.</p><p>For the 9B models, images are resized to 384 × 384 pixels. Crop to one clear question. The model can misread even simple images.</p></div>
-          <div id="model-labels"><h3>Reading the checkpoint names</h3><dl class="definitions"><div><dt>Family</dt><dd>One source question and its related teaching exercises.</dd></div><div><dt>Layer</dt><dd>A model block. The number shows how many blocks received training adapters.</dd></div><div><dt>Step</dt><dd>One training update. Step 60 means 60 updates, not 60 questions.</dd></div></dl><p>These five versions preserve selected experiments. They do not include every historical training step.</p></div>
-        </div>
-        <p class="resource-links"><a href="https://huggingface.co/OmTheLast/LlamaJEE-9B-ONNX-WebGPU">Browser model files</a><a href="https://huggingface.co/OmTheLast/jee-solver-experimental-mlx-adapters">Original Mac adapter archive</a></p>
-      </section>
-
-      <section id="how" class="page-section" aria-labelledby="how-title">
-        <div class="section-heading"><h2 id="how-title">What the solver checks</h2><p>The harness is the code around the model. It prepares the request, displays the response and performs a few limited checks.</p></div>
-        <ol class="method-list"><li><strong>Prepare the question.</strong> The request includes your subject and answer-format choices, with guidance for conventions such as thermodynamics signs.</li><li><strong>Ask for a worked solution.</strong> The model is asked to state the given information, a plan, calculations, checks and a final answer. These are requested sections, not proof of correct reasoning.</li><li><strong>Check the response.</strong> The page checks the answer format and separately calculates one simple constant-acceleration problem pattern. It does not verify general mathematics or science.</li></ol>
-        <details><summary>Technical details</summary><p>The 9B models use a custom ONNX Runtime WebGPU implementation with the Transformers.js tokenizer. The 0.8B demo uses Transformers.js. Model execution happens on the visitor’s device; it is not sent to an inference server.</p><p><a href="https://github.com/OmTheLast/LlamaJEE.js/tree/main/web">Browser source code</a> · <a href="https://github.com/OmTheLast/LlamaJEE.js/tree/main/local_lab">Original Python and MLX interface</a></p></details>
-      </section>
-
-      <section id="research" class="page-section" aria-labelledby="results-title">
-        <div class="section-heading"><h2 id="results-title">Results and project history</h2><p>The aim is a reliable solver that can run on smaller devices. The work so far has established a training and browser-deployment process; reliable JEE improvement remains unproven.</p></div>
-        <div class="results-summary"><h3>What we learned from 9B training</h3><p>Some early checkpoints scored higher on small development sets. Further training sometimes reduced accuracy or produced incomplete answers. Later runs were more stable, but no trained version met all of our criteria for improvement.</p><p>One archived 16-layer version answered 8 of 12 development questions correctly, compared with 7 of 12 for the unchanged base. Its procedure score fell from 17/24 to 14/24. That trade-off did not establish a better solver.</p></div>
-        <div class="research-charts"><figure><img src="./charts/training_trajectories.png" alt="Three separate training studies: an early validation gain fell at later checkpoints, while the later stable run tied its unchanged base." loading="lazy" /><figcaption>Checkpoint scores on separate development slices. Compare each line only with its own dashed unchanged-model baseline.</figcaption></figure><figure><img src="./charts/latest_tradeoffs.png" alt="On the latest 12-question development set, the 16-layer adapter got one extra exact answer but fewer valid procedure points." loading="lazy" /><figcaption>The latest 16-layer adapter reached 8/12 answers while procedure quality fell. These are small, reused development results.</figcaption></figure></div>
-        <h3 class="subheading">What the browser release established</h3><p>The conversion matched original-model outputs on 18 CPU and 10 Chrome synthetic comparisons. These tests checked whether conversion preserved behaviour. They did not measure JEE accuracy, and the original model’s errors on two image tests remain.</p>
-        <p><a href="https://github.com/OmTheLast/LlamaJEE.js/blob/main/research/EXPORT09B04_ORIGINAL_BROWSER_RELEASE.md">Read the browser conversion report</a></p>
-        <h3 class="subheading">Deployment history</h3><ol class="timeline"><li><time datetime="2026-09-22">22 September 2026</time><span>The public site used the separate 0.8B model. The trained 9B interface still required Python and MLX on a Mac.</span></li><li><time datetime="2026-10-23">23 October 2026</time><span>The original 9B base and five archived trained versions were published for browser execution. The public site completed a test question with the base and one trained version.</span></li></ol>
-        <p class="next-work"><strong>Next:</strong> prove that a small training update to the candidate 4B model can be exported and run on the intended devices before committing to substantial training.</p>
-        <p class="resource-links"><a href="https://github.com/OmTheLast/LlamaJEE.js">Code and experiment reports</a><a href="https://huggingface.co/OmTheLast/jee-solver-experimental-mlx-adapters/blob/main/EXPERIMENT_HISTORY.md">Training history</a></p>
-      </section>
     </main>
-    <footer class="footer shell"><p><strong>LlamaJEE.js</strong> · Om Patnaik</p><p>Page updated 25 October 2026. Model release: 23 October 2026.</p><a href="#top">Back to top</a></footer>
   </div>
 </body>
 </html>
