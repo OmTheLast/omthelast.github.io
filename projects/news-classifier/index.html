@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News Classifier API | Om Patnaik</title>
+  <meta name="description" content="An earlier project turning an AG News classifier into a validated HTTP service.">
+  <meta name="theme-color" content="#080908">
+  <link rel="canonical" href="https://ompatnaik.com/projects/news-classifier/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Om Patnaik">
+  <meta property="og:title" content="News Classifier API | Om Patnaik">
+  <meta property="og:description" content="An earlier project turning an AG News classifier into a validated HTTP service.">
+  <meta property="og:url" content="https://ompatnaik.com/projects/news-classifier/">
+  <meta property="og:image" content="https://ompatnaik.com/assets/landing-v4/om-avatar.jpg">
+  <meta property="og:image:alt" content="Om Patnaik’s profile illustration">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/landing-v5/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="shell header-inner">
+    <a class="site-name" href="/">om patnaik</a>
+    <nav class="nav" aria-label="Primary navigation"><a href="/">About</a><a href="/projects.html">Projects</a><a href="https://github.com/OmTheLast">GitHub</a></nav>
+  </div></header>
+  <main id="main" tabindex="-1"><div class="shell"><header class="page-head case-head"><a class="back-link" href="/projects.html">← All projects</a><p class="label">Project notes · Earlier learning</p><h1>News Classifier API</h1><p class="intro">An earlier project turning an AG News classifier into a validated HTTP service.</p><div class="plain-links"><a href="https://github.com/OmTheLast/news-classifier-api">GitHub repository ↗</a></div></header><div class="case-layout"><nav class="contents" aria-label="On this page"><p class="label">On this page</p><a href="#problem">Problem & motivation</a><a href="#approach">How it works</a><a href="#evidence">Evidence & limits</a><a href="#learning">What I learned & next steps</a><a href="#source">Source & setup</a></nav><div class="case-body"><section class="case-section" id="problem" aria-labelledby="problem-title"><h2 id="problem-title">Problem & motivation</h2><p>A saved classifier needs predictable inputs, outputs, and failure handling before another program can use it.</p></section><section class="case-section" id="approach" aria-labelledby="approach-title"><h2 id="approach-title">How it works</h2><p>FastAPI serves a saved TF-IDF and logistic-regression model with Pydantic input validation, structured probabilities, basic rate limits, tests, and a Docker setup.</p></section><section class="case-section" id="evidence" aria-labelledby="evidence-title"><h2 id="evidence-title">Evidence & limits</h2><p>Serving the model does not improve its classification quality. It is limited to English news and can confuse Business with Technology or World. The former public Railway endpoint returned 404 in the October 2026 portfolio audit; use the repository’s local setup.</p></section><section class="case-section" id="learning" aria-labelledby="learning-title"><h2 id="learning-title">What I learned & next steps</h2><p>I learned to test the service independently of the model. I would evaluate new article distributions before claiming the same performance beyond AG News.</p></section><section class="case-section" id="source" aria-labelledby="source-title"><h2 id="source-title">Source & setup</h2><p>See the <a href="https://github.com/OmTheLast/news-classifier-api">repository README</a> for installation, commands, and the underlying evidence.</p></section></div></div></div></main>
+  <footer class="site-footer"><div class="shell footer-inner"><a href="/projects.html">Explore all projects</a><span>Om Patnaik · October 2026</span><a href="https://github.com/OmTheLast">GitHub</a></div></footer>
+</body>
+</html>

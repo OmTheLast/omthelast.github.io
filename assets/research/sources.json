@@ -1,0 +1,17 @@
+[
+  {
+    "file": "jee-tradeoffs.png",
+    "source": "https://github.com/OmTheLast/LlamaJEE.js/blob/e3ba04d17bb3427d3b3035c6646f80ab5d34881f/charts/latest_tradeoffs.png",
+    "sha256": "2d66d376d1d31df5af472b81bcf3e3f70b0d99192280c4943a1241b9026befb1"
+  },
+  {
+    "file": "tokenizer-ratios.png",
+    "source": "https://github.com/OmTheLast/Tokenizer-estimation-study/blob/a35a2af4fbc4119caec3d544b434bb7675359e01/results/2026-10-19-deepseek-extension/analysis-01/01-count-ratios.png",
+    "sha256": "93e855c3bc685d7dbd6a09f6dcb2b76bc5613cc18ac0483e26c6262cf267d613"
+  },
+  {
+    "file": "hinglish-results.svg",
+    "source": "https://github.com/OmTheLast/mBERT-vs-MuRIL-cross-dataset-hinglish-hate/blob/86a670c51f28826d9b643a4fc5569ecd232ecea0/results/result_analysis/readme-matched-results.svg",
+    "sha256": "156c7dec4edcaf8a3a72ed2562b22db377f72eedbc80968ce763491e9c81002c"
+  }
+]
