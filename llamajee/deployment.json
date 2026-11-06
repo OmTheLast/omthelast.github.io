@@ -5,14 +5,29 @@
   "model_revision": "81f9f6a2591a348994e655a8ea8302c392b9dce2",
   "runtime": "custom ONNX Runtime WebGPU + Transformers.js tokenizer",
   "archived_adapters": 5,
-  "scope": "Experimental; synthetic conversion checks, not JEE accuracy",
+  "scope": "Experimental desktop browser solver. Native development scores are not browser JEE accuracy. Phone support unverified.",
   "sha256": {
-    "index.html": "c40f612a1263cdb1c2ee340c5b1ccad4f7097b522d0c740c132d6b09ec15e880",
+    "index.html": "d0ed71c4948890950fc8ac3315253940a15e5ca9d0955a267921e7fcd5f5262b",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "assets/index-BVuAlun6.css": "08a2a9ccb9b03517302caf72135b31628b416e4c7a1440498c69ba91ff699913",
+    "assets/index-BpBoojU5.css": "4910270e15acec41a3fb810a8e49f9e6917e97f1ffa00954c8d9ae558033717f",
+    "assets/index-CahYClAk.js": "8d1dc25f49708928cd0bc5e9975f86e6f65a92d58405c0d5206f8bd2f9b695c2",
     "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082",
-    "assets/model.worker-9Xeh-nL4.js": "9a12e803e9238f0c438b3ce461cdd002ab77f519ebc59a8aa56e660b86c048c1",
-    "assets/index-Ap14tLwP.js": "11248fc15d397366589590a3210953ed71f92453a7d9dfacbc7c90b39f6b3dbf"
+    "assets/model.worker-BSX3NWFI.js": "175187801f6bd639e887d4da181f39811f1aac292e2fcaede849774102e52eab"
   },
-  "presentation_updated": "2026-10-25"
+  "presentation_updated": "2026-10-25",
+  "updated": "2026-11-06",
+  "default_model": "4b-step30",
+  "default_harness": "h0",
+  "legacy_model_fields": "The model_repo/model_revision fields below identify the retained 9B archive; model_4b identifies the new default family.",
+  "model_4b": {
+    "repo": "OmTheLast/LlamaJEE-4B-ONNX-WebGPU",
+    "revision": "5871c9b3254effce078432f1ea98c4896c4a22d3",
+    "checkpoints": [
+      "base",
+      "step30"
+    ],
+    "input": "text only",
+    "experimental": true
+  },
+  "harness_selection": "Same-model code policies; original and experimental recovery variants"
 }
