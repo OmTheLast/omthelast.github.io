@@ -1,13 +1,13 @@
 {
   "source": "https://github.com/OmTheLast/LlamaJEE.js",
-  "canonical": "https://ompatnaik.com/LlamaJEE.js/demo/",
+  "canonical": "https://ompatnaik.com/llamajee/",
   "model_repo": "OmTheLast/LlamaJEE-9B-ONNX-WebGPU",
   "model_revision": "81f9f6a2591a348994e655a8ea8302c392b9dce2",
   "runtime": "custom ONNX Runtime WebGPU + Transformers.js tokenizer",
   "archived_adapters": 5,
   "scope": "Experimental desktop browser solver. Native development scores are not browser JEE accuracy. Phone support unverified.",
   "sha256": {
-    "index.html": "5de6d383c6530deeb5d38787007856bd61f8df744a8e69f8b1d8893e5d5a074d",
+    "index.html": "d0ed71c4948890950fc8ac3315253940a15e5ca9d0955a267921e7fcd5f5262b",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "assets/index-BpBoojU5.css": "4910270e15acec41a3fb810a8e49f9e6917e97f1ffa00954c8d9ae558033717f",
     "assets/index-CahYClAk.js": "8d1dc25f49708928cd0bc5e9975f86e6f65a92d58405c0d5206f8bd2f9b695c2",
@@ -15,7 +15,7 @@
     "assets/model.worker-BSX3NWFI.js": "175187801f6bd639e887d4da181f39811f1aac292e2fcaede849774102e52eab"
   },
   "presentation_updated": "2026-10-25",
-  "updated": "2026-11-09",
+  "updated": "2026-11-06",
   "default_model": "4b-step30",
   "default_harness": "h0",
   "legacy_model_fields": "The model_repo/model_revision fields below identify the retained 9B archive; model_4b identifies the new default family.",
