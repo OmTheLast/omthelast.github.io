@@ -43,7 +43,7 @@ def main():
     parser.add_argument('--external', action='store_true', help='GET linked external URLs, following redirects')
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
-    files = [ROOT/'index.html', ROOT/'projects.html'] + [ROOT/x/'index.html' for x in ('jee','tokenizers','hinglish')] + sorted((ROOT/'projects').glob('*/index.html'))
+    files = [ROOT/'index.html', ROOT/'projects.html'] + [ROOT/x/'index.html' for x in ('LlamaJEE.js','tokenizers','hinglish')] + sorted((ROOT/'projects').glob('*/index.html'))
     docs = {f:Document(f) for f in files}
     errors, external, count = [], set(), 0
     for f,d in docs.items():
@@ -68,9 +68,9 @@ def main():
         if hashlib.sha256(path.read_bytes()).hexdigest() != item['sha256']:
             errors.append('changed source figure: '+item['file'])
     if (ROOT/'CNAME').read_text().strip() != 'ompatnaik.com': errors.append('CNAME changed')
-    deployment = json.loads((ROOT/'llamajee/deployment.json').read_text())
+    deployment = json.loads((ROOT/'LlamaJEE.js/demo/deployment.json').read_text())
     for name, expected in deployment['sha256'].items():
-        if hashlib.sha256((ROOT/'llamajee'/name).read_bytes()).hexdigest() != expected:
+        if hashlib.sha256((ROOT/'LlamaJEE.js/demo'/name).read_bytes()).hexdigest() != expected:
             errors.append('solver deployment hash mismatch: '+name)
     results=[]
     if args.external:

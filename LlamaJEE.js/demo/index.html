@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f9fa" />
+  <link rel="icon" href="data:," />
+  <meta name="description" content="Choose a model, load it in your browser, and ask a JEE question using text or an image." />
+  <title>LlamaJEE.js — JEE problem solver</title>
+  <link rel="canonical" href="https://ompatnaik.com/LlamaJEE.js/demo/" />
+  <script type="module" crossorigin src="./assets/index-CahYClAk.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BpBoojU5.css">
+</head>
+<body>
+  <a class="skip-link" href="#solver">Skip to solver</a>
+  <div id="app">
+    <header class="topbar shell"><a class="brand" href="#solver">LlamaJEE.js</a><span class="app-subtitle">JEE problem solver</span></header>
+    <main id="top" class="shell">
+      <section id="solver" class="page-section" aria-labelledby="solver-title">
+        <div class="section-heading"><h1 id="solver-title">Solve a JEE question</h1><p>Choose a model, load it, then enter your question or add an image.</p></div>
+        <div class="model-setup">
+          <div class="model-selection">
+            <label for="model-choice">1. Choose a model</label>
+            <select id="model-choice" aria-describedby="model-detail download-size">
+<option value="4b-step30" selected>4B · trained step 30</option><option value="4b-base">4B · unchanged base</option><option value="base">9B · unchanged base</option><option value="coverage16-step060">9B · 30 families · 16 layers · step 60</option><option value="data60-step060">9B · 60 families · 3 layers · step 60</option><option value="reliable01-step030">9B · 30 families · 3 layers · step 30</option><option value="reliable01-step060">9B · 30 families · 3 layers · step 60</option><option value="reliable01-step090">9B · 30 families · 3 layers · step 90</option><option value="demo">0.8B · separate demo</option></select>
+            <div class="model-band"><strong id="model-label"></strong><small id="model-detail"></small></div>
+          </div>
+          <div class="model-loading">
+            <p class="setup-label">2. Load it on this device</p>
+            <p id="download-size" class="download-size"></p>
+            <div class="load-actions"><button id="load-button" class="button button-primary" type="button">Download and load model</button><button id="stop-button" class="button button-light" type="button" disabled>Release model</button></div>
+            <div id="model-status" class="model-status" role="status" aria-live="polite">Checking browser support…</div>
+            <div class="download-track" id="download-track" hidden><div id="download-bar"></div></div>
+          </div>
+        </div>
+        <p class="runtime-note">Your question is processed on this device. Model files download when you load a model.</p>
+        <div class="workspace">
+          <div class="input-card card">
+            <div class="card-title-row"><h3>3. Enter a question</h3></div>
+            <form id="solve-form">
+                <label for="question">Problem text <span class="muted">(optional with image)</span></label>
+                <textarea id="question" maxlength="9000" placeholder="Paste the full question, including values and answer options."></textarea>
+                <div class="image-control"><label for="image" class="upload-label"><span><strong>Add a question image</strong><small id="image-guidance">PNG or JPEG · up to 10 MB</small></span></label><input id="image" type="file" accept="image/png,image/jpeg" aria-describedby="image-guidance" /><div id="image-preview" class="image-preview" hidden></div></div>
+                <div class="harness-control"><label for="harness-choice">Solving approach</label><select id="harness-choice"><option value="direct">Original · one response</option><option value="h0" selected>Final-answer recovery · H0</option><option value="h1">Continue an unfinished response · H1</option><option value="h2">Identify the remaining task · H2</option></select><small class="field-note" id="harness-detail">If the response reaches its token limit, ask the same model to write a final answer.</small></div>
+                <div class="form-grid">
+                  <div><label for="subject">Subject</label><select id="subject"><option value="auto">Let the model decide</option><option value="mathematics">Mathematics</option><option value="physics">Physics</option><option value="chemistry">Chemistry</option></select></div>
+                  <div><label for="exam">Exam</label><select id="exam"><option value="unspecified">Unspecified</option><option value="main">JEE Main</option><option value="advanced">JEE Advanced</option></select></div>
+                  <div><label for="answer-type">Answer format</label><select id="answer-type"><option value="infer">Infer from question</option><option value="single">Single option</option><option value="multiple">One or more options</option><option value="numeric">Numeric</option></select></div>
+                  <div><label for="budget">Response limit</label><select id="budget"><option value="128">128 tokens</option><option value="384">384 tokens</option><option value="768" selected>768 tokens</option><option value="1280">1,280 tokens</option></select><small class="field-note">Tokens are pieces of text. A longer response uses more time and memory.</small></div>
+                </div>
+                <div class="input-actions"><button id="solve-button" class="button button-primary" type="submit" disabled>Generate answer</button><button id="cancel-button" class="button button-light" type="button" disabled>Stop generation</button><button id="example-button" class="button button-light" type="button">Insert example</button></div>
+              </form>
+          </div>
+          <div class="output-card card">
+            <div class="card-title-row"><h3>Model response</h3><span id="result-state" class="state-pill">Waiting</span></div>
+            <div id="result-empty" class="result-empty"><h4>No response yet</h4><p>Load a model and submit a question. Its answer and working will appear here.</p></div>
+            <div id="result-content" hidden><div id="final-card" class="final-card" hidden><span>Answer from the model</span><strong id="final-answer"></strong></div><div id="format-checks" class="format-checks" hidden></div><p id="output-model" class="download-note"></p><h4 class="output-label">Model explanation</h4><pre id="raw-output"></pre></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
