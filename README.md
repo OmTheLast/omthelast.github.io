@@ -45,7 +45,7 @@ The shared stylesheet retains the existing dark palette, Inter/IBM Plex Mono typ
 
 ## Deployment
 
-GitHub Pages currently publishes `main` from the repository root. Merge the portfolio branch to publish through that existing setup. Keep `CNAME` as `ompatnaik.com` and preserve the compiled `/LlamaJEE.js/demo/` application and its pinned deployment metadata. No DNS, framework, or hosting migration is required.
+GitHub Pages currently publishes `main` from the repository root. Merge the portfolio branch to publish through that existing setup. Keep `CNAME` as `ompatnaik.com` and preserve the compiled `/LlamaJEE.js/demo/` application and its pinned deployment metadata. Cloudflare serves that URL and its project page from the `portfolio/LlamaJEE.js/` directory. This avoids the GitHub Pages redirect to the project repository’s subdomain. The top-level `LlamaJEE.js` symlink supports local preview.
 
 Merge dependent profile/project README changes after the site deploys so new case-study backlinks resolve. The old Football Rule Cite preview path was replaced with `/Football-Rule-Cite/`; the former Railway news API returned HTTP 404 and is not advertised as live.
 
