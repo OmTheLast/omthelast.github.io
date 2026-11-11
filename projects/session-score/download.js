@@ -11,7 +11,8 @@ async function showMacDownload() {
   const link = document.getElementById("install");
   link.href = "https://github.com/" + project + "/releases/download/" + encodeURIComponent(release.tag_name) + "/" + assetName;
   link.textContent = "Download for Mac";
+  document.getElementById("beta-first-open").hidden = true;
   document.getElementById("availability").textContent =
     release.tag_name + " · Apple silicon · Unzip and move Session Score to Applications.";
 }
-showMacDownload().catch(() => { /* The source and releases links also work offline from the API. */ });
+showMacDownload().catch(() => { /* The beta and releases links also work offline from the API. */ });
