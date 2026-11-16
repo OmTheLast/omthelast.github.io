@@ -8,8 +8,8 @@
   <meta name="description" content="Choose a model, load it in your browser, and ask a JEE question using text or an image." />
   <title>LlamaJEE.js — JEE problem solver</title>
   <link rel="canonical" href="https://ompatnaik.com/llamajee/" />
-  <script type="module" crossorigin src="./assets/index-CahYClAk.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BpBoojU5.css">
+  <script type="module" crossorigin src="./assets/index-B5x9v1Y9.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DqTLgm9X.css">
 </head>
 <body>
   <a class="skip-link" href="#solver">Skip to solver</a>
@@ -54,7 +54,12 @@
           <div class="output-card card">
             <div class="card-title-row"><h3>Model response</h3><span id="result-state" class="state-pill">Waiting</span></div>
             <div id="result-empty" class="result-empty"><h4>No response yet</h4><p>Load a model and submit a question. Its answer and working will appear here.</p></div>
-            <div id="result-content" hidden><div id="final-card" class="final-card" hidden><span>Answer from the model</span><strong id="final-answer"></strong></div><div id="format-checks" class="format-checks" hidden></div><p id="output-model" class="download-note"></p><h4 class="output-label">Model explanation</h4><pre id="raw-output"></pre></div>
+            <div id="solve-progress" class="solve-progress" hidden>
+              <div class="progress-heading"><strong id="solve-phase" role="status"></strong><span id="solve-count"></span></div>
+              <progress id="reading-progress" aria-labelledby="solve-phase" hidden></progress>
+              <small class="field-note">Progress gives this stage more time automatically.</small>
+            </div>
+            <div id="result-content" hidden><div id="final-card" class="final-card" hidden><span>Answer from the model</span><strong id="final-answer"></strong></div><div id="format-checks" class="format-checks" hidden></div><p id="output-model" class="download-note"></p><h4 id="working-label" class="output-label" hidden>Model explanation</h4><pre id="raw-output"></pre></div>
           </div>
         </div>
       </section>

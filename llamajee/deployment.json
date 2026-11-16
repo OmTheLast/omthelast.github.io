@@ -7,15 +7,15 @@
   "archived_adapters": 5,
   "scope": "Experimental desktop browser solver. Native development scores are not browser JEE accuracy. Phone support unverified.",
   "sha256": {
-    "index.html": "d0ed71c4948890950fc8ac3315253940a15e5ca9d0955a267921e7fcd5f5262b",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "assets/index-BpBoojU5.css": "4910270e15acec41a3fb810a8e49f9e6917e97f1ffa00954c8d9ae558033717f",
-    "assets/index-CahYClAk.js": "8d1dc25f49708928cd0bc5e9975f86e6f65a92d58405c0d5206f8bd2f9b695c2",
+    "assets/index-B5x9v1Y9.js": "e527d60683754bf85d0654013c87620cb6fcf4a248848296dbf26fdfc19aff06",
+    "assets/index-DqTLgm9X.css": "8dc5548954d5e5a043f5677870986540bb7f725dda05cbb6763d85a77b8d36ae",
+    "assets/model.worker-BkoLokYI.js": "d8711f8b58f56b7542d30c2466dccb21849f46ce872461843a392456760e194e",
     "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082",
-    "assets/model.worker-BSX3NWFI.js": "175187801f6bd639e887d4da181f39811f1aac292e2fcaede849774102e52eab"
+    "index.html": "c3643eacbb400d6498d9e8898a141417dd03130a2ba6427c7be625eb98859e6e"
   },
   "presentation_updated": "2026-10-25",
-  "updated": "2026-11-06",
+  "updated": "2026-11-16",
   "default_model": "4b-step30",
   "default_harness": "h0",
   "legacy_model_fields": "The model_repo/model_revision fields below identify the retained 9B archive; model_4b identifies the new default family.",
