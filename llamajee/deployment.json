@@ -8,14 +8,14 @@
   "scope": "Experimental desktop browser solver. Native development scores are not browser JEE accuracy. Phone support unverified.",
   "sha256": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "assets/index-B5x9v1Y9.js": "e527d60683754bf85d0654013c87620cb6fcf4a248848296dbf26fdfc19aff06",
+    "assets/index-BcnUkIfA.js": "6067e771351437a7c3d39c9d637d19897c1a89f08f401e9718e73b00ab55d415",
     "assets/index-DqTLgm9X.css": "8dc5548954d5e5a043f5677870986540bb7f725dda05cbb6763d85a77b8d36ae",
-    "assets/model.worker-BkoLokYI.js": "d8711f8b58f56b7542d30c2466dccb21849f46ce872461843a392456760e194e",
+    "assets/model.worker-CXe_zzlk.js": "c6a60855ccda71f7686b67e4cb268b8b65d5638ff300ef3173a9842cba0190c5",
     "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082",
-    "index.html": "c3643eacbb400d6498d9e8898a141417dd03130a2ba6427c7be625eb98859e6e"
+    "index.html": "31d2192ea5b5aad00ef2d00824e39b1b8e0f921f8d170dd0fbd0e7575e187f08"
   },
   "presentation_updated": "2026-10-25",
-  "updated": "2026-11-16",
+  "updated": "2026-11-18",
   "default_model": "4b-step30",
   "default_harness": "h0",
   "legacy_model_fields": "The model_repo/model_revision fields below identify the retained 9B archive; model_4b identifies the new default family.",
